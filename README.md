@@ -1,1 +1,2 @@
 # PixelPouch
+Pixelpouch is a personal collection of hotkeys, scripts, and small utilities designed to speed up and enhance workflows in tools. Think of it as a pocket-sized pouch filled with creative helpers - read to depoly when you need them.
