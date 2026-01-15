@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "[Launch] Hou 21.0.512",
+            "type": "process",
+            "command": "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\bin\\houdini.exe",
+            "args": [],
+            "presentation": {
+                "close": true,
+                "clear": true
+            },
+            "options": {
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}\\houdini\\hotkeys;${env:PYTHONPATH}"
+                }
+            }
+        },
+    ]
+}
