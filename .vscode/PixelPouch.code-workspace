@@ -1,0 +1,40 @@
+{
+    "folders": [
+        {
+            "path": ".."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "python.analysis.extraPaths": [
+            "${workspaceFolder}\\.venv\\Lib\\site-packages"
+        ],
+        "python.autoComplete.extraPaths": [
+            "${workspaceFolder}\\.venv\\Lib\\site-packages"
+        ],
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.diagnosticSeverityOverrides": {
+            "reportMissingModuleSource": "none"
+        },
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.black-formatter",
+            "editor.formatOnSave": true,
+            "editor.codeActionsOnSave": {
+                "source.organizeImports.ruff": "explicit",
+                "source.fixAll.ruff": "explicit"
+            },
+            "editor.rulers": [
+                120
+            ]
+        },
+        "editor.formatOnSave": true,
+        "ruff.enable": true,
+        "ruff.lint.enable": true,
+        "mypy.runUsingActiveInterpreter": true,
+        "mypy.targets": [
+            "python"
+        ],
+        "mypy.configFile": "pyproject.toml",
+        "mypy.trigger": "onSave"
+    }
+}
