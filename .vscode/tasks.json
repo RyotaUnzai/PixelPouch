@@ -12,9 +12,10 @@
             },
             "options": {
                 "env": {
-                    "PYTHONPATH": "${workspaceFolder}\\houdini\\hotkeys;${env:PYTHONPATH}"
+                    "PYTHONPATH": "${workspaceFolder}\\python;${workspaceFolder}\\houdini\\hotkeys;${env:PYTHONPATH}",
+                    "HOUDINI_TOOLBAR_PATH": "&;${workspaceFolder}\\houdini\\toolbar"
                 }
             }
-        },
+        }
     ]
 }

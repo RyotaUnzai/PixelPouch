@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="shelf_pixelpouch" label="PixelPouch">
+    <memberTool name="toggle_viewport_background"/>
+  </toolshelf>
+
+  <tool name="toggle_viewport_background" label="Toggle Viewport" icon="Q:/Github/PixelPouch/houdini/hotkeys/toggle_viewport_background.svg">
+    <script scriptType="python"><![CDATA[import hou
+
+pane = hou.ui.paneTabUnderCursor()
+if not pane or pane.type() != hou.paneTabType.SceneViewer:
+    pane = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.SceneViewer)
+
+if not pane:
+    hou.ui.displayMessage("No Scene Viewer found.")
+    raise hou.Error("No Scene Viewer found.")
+
+viewport: hou.SceneViewer = pane.curViewport()
+settings: hou.GeometryViewportSettings = viewport.settings()
+color_scheme: hou.EnumValue = settings.colorScheme()
+
+if color_scheme == hou.viewportColorScheme.Dark:
+    settings.setColorScheme(hou.viewportColorScheme.Grey)
+elif color_scheme == hou.viewportColorScheme.Grey:
+    settings.setColorScheme(hou.viewportColorScheme.Light)
+else:
+    settings.setColorScheme(hou.viewportColorScheme.Dark)]]></script>
+  </tool>
+
+</shelfDocument>

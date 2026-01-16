@@ -87,3 +87,11 @@ IF ERRORLEVEL 1 (
   goto :EOF
 )
 echo [DONE] mypy installed successfully.
+
+echo [INSTALL] Installing types-houdini...
+"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install types-houdini
+IF ERRORLEVEL 1 (
+  echo [ERROR] types-houdini install failed.
+  goto :EOF
+)
+echo [DONE] types-houdini installed successfully.
