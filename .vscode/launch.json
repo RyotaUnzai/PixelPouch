@@ -10,6 +10,34 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Attach to Houdini",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 4737
+            }
+        },
+        {
+            "name": "Attach Houdini (auto port)",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "127.0.0.1",
+                "port": "${command:python.interpreterPath}"
+            },
+            "justMyCode": false
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Houdini + Auto Attach",
+            "preLaunchTask": "[Launch] Hou 21.0.512",
+            "configurations": [
+                "Attach Houdini (auto port)"
+            ]
         }
     ]
 }

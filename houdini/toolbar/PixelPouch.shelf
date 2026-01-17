@@ -7,6 +7,7 @@
 
   <toolshelf name="shelf_pixelpouch" label="PixelPouch">
     <memberTool name="toggle_viewport_background"/>
+    <memberTool name="tool_1"/>
   </toolshelf>
 
   <tool name="toggle_viewport_background" label="Toggle Viewport" icon="Q:/Github/PixelPouch/houdini/hotkeys/toggle_viewport_background.svg">
@@ -31,5 +32,4 @@ elif color_scheme == hou.viewportColorScheme.Grey:
 else:
     settings.setColorScheme(hou.viewportColorScheme.Dark)]]></script>
   </tool>
-
 </shelfDocument>

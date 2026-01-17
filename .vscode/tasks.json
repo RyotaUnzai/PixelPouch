@@ -7,15 +7,27 @@
             "command": "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\bin\\houdini.exe",
             "args": [],
             "presentation": {
-                "close": true,
+                "close": true, //
                 "clear": true
             },
             "options": {
                 "env": {
-                    "PYTHONPATH": "${workspaceFolder}\\python;${workspaceFolder}\\houdini\\hotkeys;${env:PYTHONPATH}",
-                    "HOUDINI_TOOLBAR_PATH": "&;${workspaceFolder}\\houdini\\toolbar"
+                    "HOUDINI_DEBUG": "1",
+                    "PIXELPOURCH_PATH": "${workspaceFolder}",
+                    "PYTHONPATH": "${workspaceFolder}\\python\\third_party;${workspaceFolder}\\houdini\\python;${workspaceFolder}\\python;${workspaceFolder}\\houdini\\hotkeys;${env:PYTHONPATH}",
+                    "HOUDINI_TOOLBAR_PATH": "${workspaceFolder}\\houdini\\toolbar;@/^", //"&;${workspaceFolder}\\houdini\\toolbar",
+                    "HOUDINI_PATH": "${workspaceFolder}\\houdini;&"
                 }
             }
+        },
+        {
+            "label": "Attach Houdini (read port)",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}\\python\\pixelpouch\\libs\\core\\attach.py"
+            ],
+            "problemMatcher": []
         }
     ]
 }

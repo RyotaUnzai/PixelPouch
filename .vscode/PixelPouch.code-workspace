@@ -7,10 +7,14 @@
     "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
         "python.analysis.extraPaths": [
-            "${workspaceFolder}\\.venv\\Lib\\site-packages"
+            "${workspaceFolder}\\.venv\\Lib\\site-packages",
+            "${workspaceFolder}\\houdini\\scripts",
+            "${workspaceFolder}\\Python"
         ],
         "python.autoComplete.extraPaths": [
-            "${workspaceFolder}\\.venv\\Lib\\site-packages"
+            "${workspaceFolder}\\.venv\\Lib\\site-packages",
+            "${workspaceFolder}\\houdini\\scripts",
+            "${workspaceFolder}\\Python"
         ],
         "python.analysis.typeCheckingMode": "basic",
         "python.analysis.diagnosticSeverityOverrides": {
