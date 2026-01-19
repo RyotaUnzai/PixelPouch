@@ -6,6 +6,9 @@ SET BIN_DIR=%PROJECT_ROOT%bin\
 SET EMBED_PYTHON_DIR=%BIN_DIR%python-3.10.10-embed-amd64\
 SET GET_PIP_PY_PATH=%BIN_DIR%get-pip.py
 
+:: Set up DCC environment
+SET HOUDINI_INSTALLATION_DIR=C:\Program Files\Side Effects Software\Houdini 21.0.512\
+
 :: Set up Python environment
 SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
 SET PYENV_HOME=%PYENV%
@@ -95,3 +98,21 @@ IF ERRORLEVEL 1 (
   goto :EOF
 )
 echo [DONE] types-houdini installed successfully.
+
+echo [INSTALL] Installing debugpy...
+"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install debugpy
+IF ERRORLEVEL 1 (
+  echo [ERROR] debugpy install failed.
+  goto :EOF
+)
+echo [DONE] debugpy installed successfully.
+
+
+REM Install Python packages for Houdini using Houdini's bundled Python
+echo [ISTALL] Installing debugpy for Houdini...
+%HOUDINI_INSTALLATION_DIR%python311\python.exe -m pip install debugpy --target %PROJECT_ROOT%\python\third_party
+IF ERRORLEVEL 1 (
+  echo [ERROR] debugpy install failed.
+  goto :EOF
+)
+echo [DONE] debugpy installed successfully.
