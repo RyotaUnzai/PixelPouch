@@ -13,30 +13,21 @@
         },
         {
             "name": "Attach to Houdini",
-            "type": "python",
+            "type": "debugpy",
+            "preLaunchTask": "Wait for Houdini Startup",
             "request": "attach",
             "connect": {
                 "host": "localhost",
-                "port": 4737
+                "port": 6214
             }
         },
-        {
-            "name": "Attach Houdini (auto port)",
-            "type": "python",
-            "request": "attach",
-            "connect": {
-                "host": "127.0.0.1",
-                "port": "${command:python.interpreterPath}"
-            },
-            "justMyCode": false
-        }
     ],
     "compounds": [
         {
             "name": "Launch Houdini + Auto Attach",
-            "preLaunchTask": "[Launch] Hou 21.0.512",
+            "preLaunchTask": "[Launch] Houdini",
             "configurations": [
-                "Attach Houdini (auto port)"
+                "Attach to Houdini"
             ]
         }
     ]

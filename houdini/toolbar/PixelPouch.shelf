@@ -32,4 +32,10 @@ elif color_scheme == hou.viewportColorScheme.Grey:
 else:
     settings.setColorScheme(hou.viewportColorScheme.Dark)]]></script>
   </tool>
+
+  
+  <tool name="tool_1" label="New Tool" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import launch_nodepalette
+launch_nodepalette.launch()]]></script>
+  </tool>
 </shelfDocument>

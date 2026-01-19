@@ -2,13 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "[Launch] Hou 21.0.512",
+            "label": "[Launch] Houdini",
             "type": "process",
-            "command": "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\bin\\houdini.exe",
+            "command": "${env:HOUDINI_INSTALLATION_DIR}\\bin\\houdini.exe",
             "args": [],
             "presentation": {
-                "close": true, //
-                "clear": true
+                "close": true,
+                "clear": true,
+                "reveal": "never"
             },
             "options": {
                 "env": {
@@ -18,16 +19,29 @@
                     "HOUDINI_TOOLBAR_PATH": "${workspaceFolder}\\houdini\\toolbar;@/^", //"&;${workspaceFolder}\\houdini\\toolbar",
                     "HOUDINI_PATH": "${workspaceFolder}\\houdini;&"
                 }
-            }
+            },
+            "isBackground": true
         },
         {
-            "label": "Attach Houdini (read port)",
-            "type": "shell",
-            "command": "python",
+            "label": "Get Houdini Envs",
+            "type": "process",
+            "command": "${env:HOUDINI_INSTALLATION_DIR}\\bin\\hconfig.exe",
             "args": [
-                "${workspaceFolder}\\python\\pixelpouch\\libs\\core\\attach.py"
+                "-a",
+                ">>",
+                "houdini_envs.txt"
+            ]
+        },
+        {
+            "label": "Wait for Houdini Startup",
+            "type": "shell",
+            "command": "timeout",
+            "args": [
+                "12"
             ],
-            "problemMatcher": []
+            "presentation": {
+                "reveal": "never"
+            }
         }
     ]
 }

@@ -1,6 +1,5 @@
 
 import os
-import socket
 import threading
 from pathlib import Path
 
@@ -10,7 +9,6 @@ import hou
 PROJECT_PATH = os.getenv("PIXELPOURCH_PATH") or ""
 PORT_FILE = Path(PROJECT_PATH) / ".debugpy_port"
 
-_lock = threading.Lock()
 
 
 def cleanup_debugpy_port():
@@ -27,6 +25,7 @@ def _on_hip_event(event_type):
 
 
 def start_debugpy():
+    _lock = threading.Lock()
     with _lock:
         if hasattr(hou.session, "_pixelpouch_debugpy_started"):
             return
@@ -37,23 +36,18 @@ def start_debugpy():
             return
 
         try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.bind(("127.0.0.1", 0))
-            port = sock.getsockname()[1]
-            sock.close()
-
             debugpy.configure(
                 python=r"C:\Program Files\Side Effects Software\Houdini 21.0.512\bin\hython.exe"
             )
 
-            debugpy.listen(("127.0.0.1", port))
+            _, port = debugpy.listen(("127.0.0.1", 6214))
 
             # write-once
-            if not PORT_FILE.exists():
-                PORT_FILE.write_text(
-                    f"{port}",
-                    encoding="utf-8"
-                )
+            # if not PORT_FILE.exists():
+            #     PORT_FILE.write_text(
+            #         f"{port}",
+            #         encoding="utf-8"
+            #     )
 
             print(f"[Houdini] debugpy listening on {port}")
             debugpy.wait_for_client()

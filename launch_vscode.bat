@@ -5,6 +5,9 @@ SET PROJECT_ROOT=%~dp0
 FOR %%I IN (.) DO SET PROJECT_NAME=%%~nxI
 
 
+:: Set up DCC environment
+SET HOUDINI_INSTALLATION_DIR=C:\Program Files\Side Effects Software\Houdini 21.0.512
+
 :: Set up Python environment
 SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
 SET PYENV_HOME=%PYENV%
