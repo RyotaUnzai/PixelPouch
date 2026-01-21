@@ -7,6 +7,7 @@
 
   <toolshelf name="shelf_pixelpouch" label="PixelPouch">
     <memberTool name="toggle_viewport_background"/>
+    <memberTool name="tool_1"/>
   </toolshelf>
 
   <tool name="toggle_viewport_background" label="Toggle Viewport" icon="Q:/Github/PixelPouch/houdini/hotkeys/toggle_viewport_background.svg">
@@ -32,4 +33,9 @@ else:
     settings.setColorScheme(hou.viewportColorScheme.Dark)]]></script>
   </tool>
 
+  
+  <tool name="tool_1" label="New Tool" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import launch_nodepalette
+launch_nodepalette.launch()]]></script>
+  </tool>
 </shelfDocument>

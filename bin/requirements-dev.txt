@@ -1,0 +1,7 @@
+PySide6==6.10.1
+PySide6-stubs==6.7.3.0
+ruff==0.14.13
+mypy==1.19.1
+types-houdini==21.0.512.3
+debugpy==1.8.19
+pyyaml==6.0.3

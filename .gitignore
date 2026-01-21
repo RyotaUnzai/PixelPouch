@@ -27,6 +27,7 @@ share/python-wheels/
 MANIFEST
 get-pip.py
 
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -209,11 +210,10 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# VSCode
+# UserFile
 VSCode-win32-x64*
-
-# Embed Python 
 python-*-embed-amd64
-
-# Python
+bin/python/
+python/third_party/
 dev_*.py
+*nuget.exe

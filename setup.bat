@@ -3,95 +3,60 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 
 SET PROJECT_ROOT=%~dp0
 SET BIN_DIR=%PROJECT_ROOT%bin\
-SET EMBED_PYTHON_DIR=%BIN_DIR%python-3.10.10-embed-amd64\
 SET GET_PIP_PY_PATH=%BIN_DIR%get-pip.py
+SET PY_VERSION=3.11.7
+SET LOCAL_PYTHON_DIR=%BIN_DIR%python\tools\
+SET LOCAL_PYTHON_EXE=%LOCAL_PYTHON_DIR%python.exe
+SET NUGET=%BIN_DIR%nuget.exe
 
-:: Set up Python environment
-SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
-SET PYENV_HOME=%PYENV%
-SET PYENV_ROOT=%PYENV%
-SET PATH=%PYENV%\shims;%PYENV%\bin;%PATH%
+:: Set up DCC environment
+SET HOUDINI_INSTALLATION_DIR="C:\Program Files\Side Effects Software\Houdini 21.0.512\"
 
-REM Copy .pth files
-echo [SETUP] Seting embedded Python...
-copy %BIN_DIR%python310._pth %EMBED_PYTHON_DIR%python310._pth 
-copy %BIN_DIR%setup.pth %EMBED_PYTHON_DIR%setup.pth
-echo [DONE] Set embedded Python successfully.
-
-REM Install get-pip.py
-echo [INSTALL] Installing get-pip.py...
-curl -L https://bootstrap.pypa.io/get-pip.py -o %GET_PIP_PY_PATH%
-%EMBED_PYTHON_DIR%python.exe %GET_PIP_PY_PATH%
-echo [DONE] get-pip.py installed successfully.
-
-REM Install modules into the embedded Python environment
-echo [INSTALL] Installing pyenv...
-%EMBED_PYTHON_DIR%python.exe -m pip install pyenv-win --target .pyenv
-echo [DONE] pyenv installed successfully.
-
-REM Install Python3.10.5 with pyenv
-echo [INSTALL] Installing Python3.10.5 with pyenv...
-cmd /c "%BIN_DIR%pyenv.bat"
+REM Run Ptython local setup and venv creation
+echo [STEP] Running Python local setup (create .venv)
+cmd /c "%BIN_DIR%setup_python_local.bat"
 IF ERRORLEVEL 1 (
-  echo [ERROR] pyenv step failed.
+  echo [ERROR] Python local setup failed
   goto :EOF
 )
-echo [DONE] Python3.10.5 installed successfully.
+echo [DONE] Python local setup completed
 
-REM Create virtual environment (.venv)
-echo [CREATE] Creating .venv...
-cmd /c "%BIN_DIR%venv.bat"
-IF ERRORLEVEL 1 (
-  echo [ERROR] venv step failed.
-  goto :EOF
-)
-echo [DONE] .venv created successfully.
 
 REM Activate the virtual environment and verify Python/pip paths
-echo [INFO] Activating .venv and checking Python/pip paths...
-call "%PROJECT_ROOT%.venv\Scripts\activate.bat"
-where python
-where pip
-python -c "import sys; print(sys.executable)"
+set PYTHON_EXE=%PROJECT_ROOT%.venv\Scripts\python.exe
+echo [INFO] Using Python:
+"%PYTHON_EXE%" -c "import sys; print(sys.executable)"
 
+echo [INFO] Using pip:
+"%PYTHON_EXE%" -m pip --version
+
+REM Install Python dependencies
 
 echo [UPGRADE] Upgrading pip...
-"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install --upgrade pip
+"%PYTHON_EXE%" -m pip install --upgrade pip
 IF ERRORLEVEL 1 (
-  echo [ERROR] pip upgrade failed.
+  echo [ERROR] Failed to upgrade pip.
   goto :EOF
 )
-echo [DONE] pip upgraded successfully.
 
-echo [INSTALL] Installing PySide6...
-"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install PySide6
-"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install PySide6-stubs
+echo [INSTALL] Installing Python development dependencies...
+"%PYTHON_EXE%" -m pip install -r %BIN_DIR%requirements-dev.txt
 IF ERRORLEVEL 1 (
-  echo [ERROR] PySide6 install failed.
+  echo [ERROR] Failed to install development dependencies.
   goto :EOF
 )
-echo [DONE] PySide6 installed successfully.
 
-echo [INSTALL] Installing ruff...
-"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install ruff
-IF ERRORLEVEL 1 (
-  echo [ERROR] ruff install failed.
-  goto :EOF
+echo [CLEAN] Cleaning DCC third-party directory...
+if exist "%PROJECT_ROOT%\python\third_party" (
+  rmdir /s /q "%PROJECT_ROOT%\python\third_party"
 )
-echo [DONE] ruff installed successfully.
+mkdir "%PROJECT_ROOT%\python\third_party"
 
-echo [INSTALL] Installing mypy...
-"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install mypy
+echo [INSTALL] Installing Python DCC tool dependencies...
+"%PYTHON_EXE%" -m pip install -r %BIN_DIR%requirements-dcc.txt --target "%PROJECT_ROOT%\python\third_party"
 IF ERRORLEVEL 1 (
-  echo [ERROR] mypy install failed.
+  echo [ERROR] Failed to install DCC tool dependencies.
   goto :EOF
 )
-echo [DONE] mypy installed successfully.
 
-echo [INSTALL] Installing types-houdini...
-"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install types-houdini
-IF ERRORLEVEL 1 (
-  echo [ERROR] types-houdini install failed.
-  goto :EOF
-)
-echo [DONE] types-houdini installed successfully.
+echo [DONE] Python dependencies installed successfully.
