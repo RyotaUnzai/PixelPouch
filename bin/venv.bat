@@ -1,17 +1,14 @@
 @echo off
 
-REM Go up one directory from bin\venv.bat to the project root
-pushd "%~dp0.."
 
-REM Verify Python 3.10.5 is installed for pyenv
-set PYENV_HOME=%CD%\.pyenv\pyenv-win
-set PY310=%PYENV_HOME%\versions\3.10.5\python.exe
-if exist "%PY310%" (
-  set PYTHON_EXE=%PY310%
-) else (
-  echo [ERROR] Python 3.10.5 for pyenv was not found.
-  goto :EOF
-)
+REM Verify Python 3.11.7 
+SET BIN_DIR=%CD%\bin\
+SET PYTHON_DIR=%BIN_DIR%python\tools\
+SET PYTHON_EXE=%EMBED_PYTHON_DIR%python.exe
+
+curl -L -o %BIN_DIR%nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+
+%BIN_DIR%nuget.exe install python -Version 3.11.7 -ExcludeVersion -OutputDirectory %BIN_DIR%
 
 echo [INFO] Using "%PYTHON_EXE%" to create venv at "%CD%\.venv"
 echo [CREATE] Creating virtual environment .venv...
@@ -21,3 +18,4 @@ echo [DONE] .venv created successfully.
 
 popd
 exit /b %ERR%
+

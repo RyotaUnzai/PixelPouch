@@ -3,43 +3,50 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 
 SET PROJECT_ROOT=%~dp0
 SET BIN_DIR=%PROJECT_ROOT%bin\
-SET EMBED_PYTHON_DIR=%BIN_DIR%python-3.10.10-embed-amd64\
+SET PYTHON_DIR=%BIN_DIR%python\tools\
 SET GET_PIP_PY_PATH=%BIN_DIR%get-pip.py
 
 :: Set up DCC environment
-SET HOUDINI_INSTALLATION_DIR=C:\Program Files\Side Effects Software\Houdini 21.0.512\
+SET HOUDINI_INSTALLATION_DIR="C:\Program Files\Side Effects Software\Houdini 21.0.512\"
 
-:: Set up Python environment
-SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
-SET PYENV_HOME=%PYENV%
-SET PYENV_ROOT=%PYENV%
-SET PATH=%PYENV%\shims;%PYENV%\bin;%PATH%
+@REM :: Set up Python environment
+@REM SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
+@REM SET PYENV_HOME=%PYENV%
+@REM SET PYENV_ROOT=%PYENV%
+@REM SET PATH=%PYENV%\shims;%PYENV%\bin;%PATH%
+SET PYTHON_EXE=%EMBED_PYTHON_DIR%python.exe
 
 REM Copy .pth files
-echo [SETUP] Seting embedded Python...
-copy %BIN_DIR%python310._pth %EMBED_PYTHON_DIR%python310._pth 
-copy %BIN_DIR%setup.pth %EMBED_PYTHON_DIR%setup.pth
-echo [DONE] Set embedded Python successfully.
+@REM echo [SETUP] Seting embedded Python...
+@REM copy %BIN_DIR%python311._pth %EMBED_PYTHON_DIR%python311._pth 
+@REM copy %BIN_DIR%setup.pth %EMBED_PYTHON_DIR%setup.pth
+@REM echo [DONE] Set embedded Python successfully.
 
-REM Install get-pip.py
-echo [INSTALL] Installing get-pip.py...
-curl -L https://bootstrap.pypa.io/get-pip.py -o %GET_PIP_PY_PATH%
-%EMBED_PYTHON_DIR%python.exe %GET_PIP_PY_PATH%
-echo [DONE] get-pip.py installed successfully.
+@REM REM Install get-pip.py
+@REM echo [INSTALL] Installing get-pip.py...
+@REM curl -L https://bootstrap.pypa.io/get-pip.py -o %GET_PIP_PY_PATH%
+@REM %EPYTHON_EXER% %GET_PIP_PY_PATH%
+@REM echo [DONE] get-pip.py installed successfully.
 
-REM Install modules into the embedded Python environment
-echo [INSTALL] Installing pyenv...
-%EMBED_PYTHON_DIR%python.exe -m pip install pyenv-win --target .pyenv
-echo [DONE] pyenv installed successfully.
 
-REM Install Python3.10.5 with pyenv
-echo [INSTALL] Installing Python3.10.5 with pyenv...
-cmd /c "%BIN_DIR%pyenv.bat"
-IF ERRORLEVEL 1 (
-  echo [ERROR] pyenv step failed.
-  goto :EOF
-)
-echo [DONE] Python3.10.5 installed successfully.
+@REM echo [INSTALL] Installing virtualenv...
+@REM %EPYTHON_EXER% -m pip install virtualenv
+@REM echo [DONE] Installed virtualenv successfully.
+
+
+@REM REM Install modules into the embedded Python environment
+@REM echo [INSTALL] Installing pyenv...
+@REM %EMBED_PYTHON_DIR%python.exe -m pip install pyenv-win --target .pyenv
+@REM echo [DONE] pyenv installed successfully.
+
+@REM REM Install Python3.11.7 with pyenv
+@REM echo [INSTALL] Installing Python3.11.7 with pyenv...
+@REM cmd /c "%BIN_DIR%pyenv.bat"
+@REM IF ERRORLEVEL 1 (
+@REM   echo [ERROR] pyenv step failed.
+@REM   goto :EOF
+@REM )
+@REM echo [DONE] Python3.11.7 installed successfully.
 
 REM Create virtual environment (.venv)
 echo [CREATE] Creating .venv...
@@ -107,6 +114,14 @@ IF ERRORLEVEL 1 (
 )
 echo [DONE] debugpy installed successfully.
 
+echo [INSTALL] Installing pyyaml...
+"%PROJECT_ROOT%.venv\Scripts\python.exe" -m pip install pyyaml
+IF ERRORLEVEL 1 (
+  echo [ERROR] pyyaml install failed.
+  goto :EOF
+)
+echo [DONE] pyyaml installed successfully.
+
 
 REM Install Python packages for Houdini using Houdini's bundled Python
 echo [ISTALL] Installing debugpy for Houdini...
@@ -116,3 +131,11 @@ IF ERRORLEVEL 1 (
   goto :EOF
 )
 echo [DONE] debugpy installed successfully.
+
+echo [ISTALL] Installing pyyaml for Houdini...
+%HOUDINI_INSTALLATION_DIR%python311\python.exe -m pip install debugpy --target %PROJECT_ROOT%\python\third_party
+IF ERRORLEVEL 1 (
+  echo [ERROR] pyyaml install failed.
+  goto :EOF
+)
+echo [DONE] pyyaml installed successfully.

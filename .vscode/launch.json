@@ -14,7 +14,7 @@
         {
             "name": "Attach to Houdini",
             "type": "debugpy",
-            "preLaunchTask": "Wait for Houdini Startup",
+            // "preLaunchTask": "Wait for Houdini Startup",
             "request": "attach",
             "connect": {
                 "host": "localhost",

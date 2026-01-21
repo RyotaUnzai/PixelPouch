@@ -1,9 +1,8 @@
-import atexit
+# import atexit
 
-import hou
-import set_debug
+# import set_debug
 
-if __name__ == "__main__":
-    atexit.register(set_debug.cleanup_debugpy_port)
-    hou.hipFile.addEventCallback(set_debug._on_hip_event)
-    set_debug.main()
+# if __name__ == "__main__":
+#     atexit.register(set_debug.stop_debugpy)
+#     set_debug.register_exit_hook()
+#     set_debug.main()
