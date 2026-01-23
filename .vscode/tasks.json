@@ -4,28 +4,34 @@
         {
             "label": "[Launch] Houdini",
             "type": "process",
-            "command": "${env:HOUDINI_INSTALLATION_DIR}\\bin\\houdini.exe",
-            "args": [],
+            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "args": [
+                "pixelpouch_hou_dev",
+                "--",
+                "houdini.exe"
+            ],
             "presentation": {
                 "close": true,
                 "clear": true,
                 "reveal": "never"
-            },
-            "options": {
-                "env": {
-                    "HOUDINI_DEBUG": "1",
-                    "PIXELPOURCH_PATH": "${workspaceFolder}",
-                    "PYTHONPATH": "${workspaceFolder}\\python\\third_party;${workspaceFolder}\\houdini\\python;${workspaceFolder}\\python;${workspaceFolder}\\houdini\\hotkeys;${env:PYTHONPATH}",
-                    "HOUDINI_TOOLBAR_PATH": "${workspaceFolder}\\houdini\\toolbar;@/^", //"&;${workspaceFolder}\\houdini\\toolbar",
-                    "HOUDINI_PATH": "${workspaceFolder}\\houdini;&"
-                }
-            },
-            "isBackground": true
+            }
+        },
+        {
+            "label": "[Rez] env check",
+            "type": "process",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "args": [
+                "--",
+                "powershell",
+                "-NoExit",
+                "-Command",
+                "echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem Q:\\Github\\PixelPouch\\rez\\projects"
+            ]
         },
         {
             "label": "Get Houdini Envs",
             "type": "process",
-            "command": "${env:HOUDINI_INSTALLATION_DIR}\\bin\\hconfig.exe",
+            "command": "${env:HOUDINI_LOCATION}\\bin\\hconfig.exe",
             "args": [
                 "-a",
                 ">>",
@@ -33,11 +39,27 @@
             ]
         },
         {
-            "label": "Wait for Houdini Startup",
+            "label": "Wait for ready",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "$timeout=60; $elapsed=0; while (-not (Test-Path .debugpy_ready)) { Start-Sleep -Milliseconds 500; $elapsed+=0.5; if ($elapsed -ge $timeout) { throw 'Timeout waiting for debugpy ready' } }"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "close": true,
+                "clear": true,
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "Wait for Startup",
             "type": "shell",
             "command": "timeout",
             "args": [
-                "12"
+                "1"
             ],
             "presentation": {
                 "reveal": "never"

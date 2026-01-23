@@ -6,7 +6,10 @@ FOR %%I IN (.) DO SET PROJECT_NAME=%%~nxI
 
 
 :: Set up DCC environment
-SET HOUDINI_INSTALLATION_DIR=C:\Program Files\Side Effects Software\Houdini 21.0.512
+SET HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini 21.0.512
+
+:: Set up Rez environment
+set REZ_PACKAGES_PATH=%PROJECT_ROOT%rez\packages;%PROJECT_ROOT%rez\projects
 
 :: Set up Python environment
 SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
