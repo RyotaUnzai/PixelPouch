@@ -13,12 +13,15 @@ ignore = []
 select = ["F", "B", "I", "E", "W", "ANN", "TC"]
 
 [tool.mypy]
+exclude = [
+  "ui_.*\\.py$",
+]
+explicit_package_bases = true
+ignore_missing_imports = true
+mypy_path = "python/"
 python_version = "3.11"
 strict = true
-ignore_missing_imports = true
-exclude = [
-    "ui_.*\\.py$"
-]
 
-[mypy-PySide6.*]
+[[tool.mypy.overrides]]
 ignore_missing_imports = false
+module = ["PySide6.*"]

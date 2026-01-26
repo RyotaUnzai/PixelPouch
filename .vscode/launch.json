@@ -12,22 +12,34 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Attach to Houdini",
+            "name": "[Debug] Attach to Houdini",
             "type": "debugpy",
-            // "preLaunchTask": "Wait for Houdini Startup",
             "request": "attach",
             "connect": {
                 "host": "localhost",
                 "port": 6214
             }
         },
+        {
+            "name": "[Debug] Auto Attach to Houdini",
+            "type": "debugpy",
+            "preLaunchTask": "[Debug] Wait for debugpy ready",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 6214
+            },
+            "presentation": {
+                "hidden": true
+            }
+        },
     ],
     "compounds": [
         {
-            "name": "Launch Houdini + Auto Attach",
-            "preLaunchTask": "[Launch] Houdini",
+            "name": "[Debug] Houdini: Launch + Auto Attach",
+            "preLaunchTask": "[Debug] Houdini",
             "configurations": [
-                "Attach to Houdini"
+                "[Debug] Auto Attach to Houdini"
             ]
         }
     ]

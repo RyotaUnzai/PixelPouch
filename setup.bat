@@ -10,7 +10,7 @@ SET LOCAL_PYTHON_EXE=%LOCAL_PYTHON_DIR%python.exe
 SET NUGET=%BIN_DIR%nuget.exe
 
 :: Set up DCC environment
-SET HOUDINI_INSTALLATION_DIR="C:\Program Files\Side Effects Software\Houdini 21.0.512\"
+SET HOUDINI_LOCATION="C:\Program Files\Side Effects Software\Houdini 21.0.512\"
 
 REM Run Ptython local setup and venv creation
 echo [STEP] Running Python local setup (create .venv)

@@ -10,13 +10,13 @@
             "${workspaceFolder}\\.venv\\Lib\\site-packages",
             "${workspaceFolder}\\houdini\\python",
             "${workspaceFolder}\\houdini\\scripts",
-            "${workspaceFolder}\\Python"
+            "${workspaceFolder}\\python"
         ],
         "python.autoComplete.extraPaths": [
             "${workspaceFolder}\\.venv\\Lib\\site-packages",
             "${workspaceFolder}\\houdini\\python",
             "${workspaceFolder}\\houdini\\scripts",
-            "${workspaceFolder}\\Python"
+            "${workspaceFolder}\\python"
         ],
         "python.analysis.typeCheckingMode": "basic",
         "python.analysis.diagnosticSeverityOverrides": {
