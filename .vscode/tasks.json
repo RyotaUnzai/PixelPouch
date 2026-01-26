@@ -2,7 +2,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "[Launch] Houdini",
+            "label": "[Release] Houdini",
+            "type": "process",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "args": [
+                "pixelpouch_hou_release",
+                "--",
+                "houdini.exe"
+            ],
+            "presentation": {
+                "close": true,
+                "clear": true,
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "[Debug] Houdini",
             "type": "process",
             "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
             "args": [
@@ -17,7 +32,7 @@
             }
         },
         {
-            "label": "[Rez] env check",
+            "label": "[Debug] Check rez env",
             "type": "process",
             "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
             "args": [
@@ -29,7 +44,7 @@
             ]
         },
         {
-            "label": "Get Houdini Envs",
+            "label": "[Debug] Get Houdini Envs",
             "type": "process",
             "command": "${env:HOUDINI_LOCATION}\\bin\\hconfig.exe",
             "args": [
@@ -39,29 +54,19 @@
             ]
         },
         {
-            "label": "Wait for ready",
+            "label": "[Debug] Wait for debugpy ready",
             "type": "shell",
             "command": "powershell",
             "args": [
                 "-NoProfile",
-                "-Command",
-                "$timeout=60; $elapsed=0; while (-not (Test-Path .debugpy_ready)) { Start-Sleep -Milliseconds 500; $elapsed+=0.5; if ($elapsed -ge $timeout) { throw 'Timeout waiting for debugpy ready' } }"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\bin\\wait_for_debugpy_ready.ps1"
             ],
-            "problemMatcher": [],
             "presentation": {
                 "close": true,
                 "clear": true,
-                "reveal": "never"
-            }
-        },
-        {
-            "label": "Wait for Startup",
-            "type": "shell",
-            "command": "timeout",
-            "args": [
-                "1"
-            ],
-            "presentation": {
                 "reveal": "never"
             }
         }
