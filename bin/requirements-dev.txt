@@ -5,6 +5,6 @@ mypy==1.19.1
 types-houdini==21.0.512.3
 debugpy==1.8.19
 pyyaml==6.0.3
-psutil=7.2.1
-types-psutil=7.2.1.20260116
-rez=3.3.0
+psutil==7.2.1
+types-psutil==7.2.1.20260116
+rez==3.3.0
