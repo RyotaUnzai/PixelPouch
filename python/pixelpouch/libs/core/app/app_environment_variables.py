@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import os
 from abc import ABC
-from distutils.util import strtobool
 from enum import Enum
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional, Type, TypeVar
@@ -19,6 +18,30 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
 
 _TEnum = TypeVar("_TEnum", bound=Enum)
+
+
+def _parse_bool(value: str) -> bool:
+    """Parse a string into a boolean value.
+
+    Accepts common boolean representations:
+    - True: 'y', 'yes', 't', 'true', 'on', '1'
+    - False: 'n', 'no', 'f', 'false', 'off', '0'
+
+    Args:
+        value: String value to parse.
+
+    Returns:
+        Boolean value.
+
+    Raises:
+        ValueError: If the string cannot be interpreted as a boolean.
+    """
+    normalized = value.lower().strip()
+    if normalized in ("y", "yes", "t", "true", "on", "1"):
+        return True
+    if normalized in ("n", "no", "f", "false", "off", "0"):
+        return False
+    raise ValueError(f"Cannot convert '{value}' to boolean")
 
 
 class EnvironmentVariableError(RuntimeError):
@@ -162,7 +185,7 @@ class AppEnvironmentVariables(ABC):
             return False
 
         try:
-            return bool(strtobool(value))
+            return _parse_bool(value)
         except ValueError as e:
             raise EnvironmentVariableError(
                 f"Environment variable '{key}' must be a boolean, got '{value}'."
@@ -194,7 +217,7 @@ class AppEnvironmentVariables(ABC):
             return False
 
         try:
-            return bool(strtobool(value))
+            return _parse_bool(value)
         except ValueError as e:
             raise EnvironmentVariableError(
                 f"Environment variable '{key}' must be a boolean, got '{value}'."

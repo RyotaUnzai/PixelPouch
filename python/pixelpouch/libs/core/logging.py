@@ -25,13 +25,13 @@ import yaml
 from pixelpouch.libs.core.environment_variable_key import (
     PixelPouchEnvironmentVariables,
 )
-
-PP_ENV = PixelPouchEnvironmentVariables()
-
-from .utility import (
+from pixelpouch.libs.core.utility import (
     Singleton,
     extract_environment_variables,
 )
+
+PP_ENV = PixelPouchEnvironmentVariables()
+
 
 _R = TypeVar("_R")
 _P = ParamSpec("_P")
@@ -62,7 +62,7 @@ class LogLevel(IntEnum):
     NOTSET = logging.NOTSET
 
 
-class PixelPouchLogger(logging.getLoggerClass()):  # type: ignore
+class PixelPouchLogger(logging.getLoggerClass()):  # type: ignore[misc]
     """Custom logger class used throughout the PixelPouch project.
 
     This class subclasses the current logger class returned by
