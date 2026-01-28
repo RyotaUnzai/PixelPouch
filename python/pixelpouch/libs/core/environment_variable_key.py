@@ -29,6 +29,13 @@ class PixelPouchEnv(StrEnum):
 
 
 @unique
+class ExecutionContextEnv(StrEnum):
+    VSCODE = "vscode"
+    HOUDINI = "houdini"
+    MAYA = "maya"
+
+
+@unique
 class EnvironmentVariableKey(StrEnum):
     """String enumeration of supported environment variable keys.
 
@@ -41,6 +48,7 @@ class EnvironmentVariableKey(StrEnum):
     USERPROFILE = "USERPROFILE"
     PIXELPOUCH_LOCATION = "PIXELPOUCH_LOCATION"
     PIXELPOUCH_ENV = "PIXELPOUCH_ENV"
+    PIXELPOUCH_EXECUTION_CONTEXT = "PIXELPOUCH_EXECUTION_CONTEXT"
 
     # dev-only
     PIXELPOUCH_DEBUGGER_ENABLE = "PIXELPOUCH_DEBUGGER_ENABLE"
@@ -75,16 +83,23 @@ class PixelPouchEnvironmentVariables(AppEnvironmentVariables):
         self.__PIXELPOUCH_LOCATION: Path = self._read_path(
             self._env, EnvironmentVariableKey.PIXELPOUCH_LOCATION
         )
+
         self.__PIXELPOUCH_ENV: str = self._read_str(
             self._env, EnvironmentVariableKey.PIXELPOUCH_ENV
+        )
+
+        self.__PIXELPOUCH_EXECUTION_CONTEXT: str = self._read_str(
+            self._env, EnvironmentVariableKey.PIXELPOUCH_EXECUTION_CONTEXT
         )
 
         # --- debug (always optional attributes) ---
         self.__PIXELPOUCH_DEBUGGER_ENABLE: Optional[bool] = False
         self.__PIXELPOUCH_HOST: str = "0.0.0.0"
         self.__PIXELPOUCH_PORT: int = 0
-
-        if self.PIXELPOUCH_ENV == PixelPouchEnv.DEV:
+        if (
+            self.PIXELPOUCH_ENV == PixelPouchEnv.DEV
+            and self.PIXELPOUCH_EXECUTION_CONTEXT != ExecutionContextEnv.VSCODE
+        ):
             self._init_dev()
 
     def _init_dev(self) -> None:
@@ -145,6 +160,15 @@ class PixelPouchEnvironmentVariables(AppEnvironmentVariables):
             A string representing the active PixelPouch environment.
         """
         return self.__PIXELPOUCH_ENV
+
+    @property
+    def PIXELPOUCH_EXECUTION_CONTEXT(self) -> str:
+        """Returns the current execution context identifier
+
+        Returns:
+            A string representing the active execution context.
+        """
+        return self.__PIXELPOUCH_EXECUTION_CONTEXT
 
     # -------------------------
     # properties (debug)

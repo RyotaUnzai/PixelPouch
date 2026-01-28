@@ -3,6 +3,6 @@ from pixelpouch.houdini.ops.create_node import create_node
 from pixelpouch.houdini.tools.nodepalette import api, run
 
 
-def launch():
+def launch() -> None:
     api.create_node = create_node
-    run.run(hou.ui.mainQtWindow())
+    run.run(hou.qt.mainWindow())

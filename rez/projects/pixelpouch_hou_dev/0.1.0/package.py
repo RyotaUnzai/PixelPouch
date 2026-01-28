@@ -12,5 +12,6 @@ def commands():
     env.PIXELPOUCH_DEBUGGER_ENABLE = "1"
     env.PIXELPOUCH_HOST = "127.0.0.1"
     env.PIXELPOUCH_PORT = "6214"
+    env.PIXELPOUCH_EXECUTION_CONTEXT = "houdini"
 
     # env.PIXELPOUCH_ENABLE_EXPERIMENTAL = "1"

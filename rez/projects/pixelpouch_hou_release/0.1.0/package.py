@@ -5,8 +5,10 @@ requires = [
     "pixelpouch_houdini-0.1.0",
 ]
 
+
 def commands():
     env.PIXELPOUCH_LOCATION = "{root}/../../../../"
     env.PIXELPOUCH_ENV = "release"
+    env.PIXELPOUCH_EXECUTION_CONTEXT = "houdini"
 
     # env.PIXELPOUCH_ENABLE_EXPERIMENTAL = "1"

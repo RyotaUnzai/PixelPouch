@@ -5,6 +5,7 @@ factory, structured log record creation, and a decorator for tracing function
 and method execution. Logging configuration is loaded from a YAML file and
 supports environment variable expansion.
 """
+
 import functools
 import inspect
 import io
@@ -21,21 +22,31 @@ from typing import Any, Callable, Mapping, Optional, ParamSpec, TypeAlias, TypeV
 
 import debugpy
 import yaml
-
-from .environment_variable_key import (
+from pixelpouch.libs.core.environment_variable_key import (
     PixelPouchEnvironmentVariables,
 )
+
+PP_ENV = PixelPouchEnvironmentVariables()
+
 from .utility import (
     Singleton,
     extract_environment_variables,
 )
 
-PP_ENV = PixelPouchEnvironmentVariables()
-
 _R = TypeVar("_R")
 _P = ParamSpec("_P")
 _logging_ArgsType: TypeAlias = tuple[object, ...] | Mapping[str, object]
-_logging_SysExcInfoType: TypeAlias = tuple[type[BaseException] | BaseException | Optional[types.TracebackType]] | tuple[None, None, None]
+_logging_SysExcInfoType: TypeAlias = (
+    tuple[type[BaseException] | BaseException | Optional[types.TracebackType]]
+    | tuple[None, None, None]
+)
+
+
+def _resolve_pixelpouch_root() -> Path:
+    value = os.environ.get("PIXELPOUCH_LOCATION")
+    if not value:
+        return Path.cwd()
+    return Path(value).resolve()
 
 
 class LogLevel(IntEnum):
@@ -49,6 +60,7 @@ class LogLevel(IntEnum):
     INFO = logging.INFO
     DEBUG = logging.DEBUG
     NOTSET = logging.NOTSET
+
 
 class PixelPouchLogger(logging.getLoggerClass()):  # type: ignore
     """Custom logger class used throughout the PixelPouch project.
@@ -101,7 +113,7 @@ class PixelPouchLoggerFactory(Singleton):
         assert name
 
         logger = logging.getLogger(name)
-        return cast(PixelPouchLogger, logger)
+        return cast("PixelPouchLogger", logger)
 
     __lock = threading.Lock()
     __initialized = False
@@ -123,7 +135,7 @@ class PixelPouchLoggerFactory(Singleton):
             logging.setLoggerClass(PixelPouchLogger)
 
             with open(config_path.as_posix(), "rt") as file:
-                data: Any= yaml.safe_load(file.read())
+                data: Any = yaml.safe_load(file.read())
             data = extract_environment_variables(data)
 
             log_path = Path(data["handlers"]["file"]["filename"])
@@ -132,7 +144,6 @@ class PixelPouchLoggerFactory(Singleton):
             logging.config.dictConfig(data)
 
             cls.__initialized = True
-
 
 
 def __make_record(
@@ -182,6 +193,7 @@ def __make_record(
 
                 skip = 0
 
+                # src_dir = _resolve_pixelpouch_root()
                 src_dir = PP_ENV.PIXELPOUCH_LOCATION.resolve()
                 stacks = traceback.extract_stack(tb.tb_frame)
                 for fs in stacks:
@@ -243,9 +255,9 @@ def PixelPouch_trace(
         frame = inspect.stack()[1]
         caller_module = inspect.getmodule(frame[0])
         if hasattr(caller_module, "__package__"):
-            name = getattr(caller_module, "__package__")
+            name = caller_module.__package__
         elif hasattr(caller_module, "__name__"):
-            name = getattr(caller_module, "__name__")
+            name = caller_module.__name__
         else:
             raise RuntimeError("Failed to get caller name.")
 
@@ -281,7 +293,14 @@ def PixelPouch_trace(
 
                     ex = ex if output_error else None
 
-                    record = __make_record(logger, LogLevel.ERROR, frame_, msg, exc_info=ex, stack_info=stack_info)
+                    record = __make_record(
+                        logger,
+                        LogLevel.ERROR,
+                        frame_,
+                        msg,
+                        exc_info=ex,
+                        stack_info=stack_info,
+                    )
                     logger.handle(record)
 
                     raise

@@ -5,11 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
+            "name": "Python Debugger: Current File (PixelPouch)",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/python",
+                "PIXELPOUCH_ENV": "dev",
+                "PIXELPOUCH_EXECUTION_CONTEXT": "vscode",
+                "PIXELPOUCH_LOCATION": "${workspaceFolder}",
+                "HOUDINI_LOCATION": "${env:HOUDINI_LOCATION}",
+                "HYTHON_LOCATION": "${env:HOUDINI_LOCATION}/bin/hython.exe",
+            }
         },
         {
             "name": "[Debug] Attach to Houdini",

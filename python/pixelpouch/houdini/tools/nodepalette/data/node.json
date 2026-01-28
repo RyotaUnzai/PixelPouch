@@ -1,0 +1,68 @@
+{
+    "widgets": [
+        {
+            "name": "null",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "group",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "attribwrangle",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "attribcreate",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "attribexpression",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "filecache",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "add",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "transform",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "copytopoints",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "line",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "curve",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "mountain",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "voronoifracture",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "scatter",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "vdbfrompolygon",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "convertvdb",
+            "widget": "QPushButton"
+        }
+    ]
+}

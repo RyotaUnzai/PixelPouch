@@ -6,13 +6,12 @@ in a background thread and for monitoring the lifetime of an external process
 immediately to avoid orphaned helper processes.
 """
 
-from __future__ import annotations
-
 import os
 import threading
 import time
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Optional
+from pathlib import Path
+from typing import Optional
 
 import debugpy
 import psutil
@@ -20,9 +19,6 @@ from pixelpouch.libs.core.environment_variable_key import (
     PixelPouchEnvironmentVariables,
 )
 from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 PP_ENV = PixelPouchEnvironmentVariables()

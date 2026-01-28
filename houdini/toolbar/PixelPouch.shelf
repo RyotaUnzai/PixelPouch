@@ -9,6 +9,8 @@
     <memberTool name="toggle_viewport_background"/>
     <memberTool name="tool_nodepalette"/>
     <memberTool name="tool_debugpy"/>
+    <memberTool name="tool_reload"/>
+    <memberTool name="tool_icon_browser"/>
   </toolshelf>
 
   <tool name="toggle_viewport_background" label="Toggle Viewport" icon="Q:/Github/PixelPouch/houdini/hotkeys/toggle_viewport_background.svg">

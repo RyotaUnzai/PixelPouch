@@ -19,6 +19,7 @@
             "${workspaceFolder}\\python"
         ],
         "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.diagnosticMode": "openFilesOnly",
         "python.analysis.diagnosticSeverityOverrides": {
             "reportMissingModuleSource": "none"
         },
@@ -41,6 +42,6 @@
             "python"
         ],
         "mypy.configFile": "pyproject.toml",
-        "mypy.trigger": "onSave"
+        "qt-ui.customWidgetsDesignerExePath": "${workspaceFolder}\\.venv\\Lib\\site-packages\\PySide6\\designer.exe"
     }
 }
