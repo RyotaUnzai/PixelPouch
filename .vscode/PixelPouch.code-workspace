@@ -5,6 +5,16 @@
         }
     ],
     "settings": {
+        "files.exclude": {
+            "**bin**": true,
+            "**.venv**": true,
+            "**python\\third_party**": true,
+        },
+        "python.analysis.exclude": [
+            "${workspaceFolder}\\bin\\**",
+            "${workspaceFolder}\\python\\third_party\\**",
+            "${workspaceFolder}\\rez\\*"
+        ],
         "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
         "python.analysis.extraPaths": [
             "${workspaceFolder}\\.venv\\Lib\\site-packages",
@@ -42,6 +52,8 @@
             "python"
         ],
         "mypy.configFile": "pyproject.toml",
-        "qt-ui.customWidgetsDesignerExePath": "${workspaceFolder}\\.venv\\Lib\\site-packages\\PySide6\\designer.exe"
+        "qt-ui.customWidgetsDesignerExePath": "${workspaceFolder}\\.venv\\Lib\\site-packages\\PySide6\\designer.exe",
+        "github.copilot.chat.agent.currentEditorContext.enabled": false,
+        "chat.disableAIFeatures": true,
     }
 }

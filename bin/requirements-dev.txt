@@ -8,3 +8,4 @@ pyyaml==6.0.3
 psutil==7.2.1
 types-psutil==7.2.1.20260116
 rez==3.3.0
+pydantic==2.12.5
