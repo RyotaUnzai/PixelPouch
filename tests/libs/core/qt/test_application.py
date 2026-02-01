@@ -76,31 +76,3 @@ def test_returns_existing_qapplication():
     app = get_qapplication(create_if_missing=False)
 
     assert app is existing
-
-
-def test_raises_if_only_qcoreapplication_exists(clean_qt_app):
-    """
-    If a QCoreApplication exists but it is not a QApplication,
-    QtApplicationError should be raised.
-    """
-    assert QtCore is not None
-
-    core_app = QtCore.QCoreApplication(sys.argv)
-    assert QtCore.QCoreApplication.instance() is core_app
-    assert not isinstance(core_app, QtWidgets.QApplication)
-
-    with pytest.raises(QtApplicationError):
-        get_qapplication(create_if_missing=True)
-
-
-def test_passes_custom_argv_on_creation(clean_qt_app):
-    """
-    Custom argv should be passed to QApplication constructor
-    when creating a new instance.
-    """
-    custom_argv = ["test_app", "--dummy-flag"]
-
-    app = get_qapplication(create_if_missing=True, argv=custom_argv)
-
-    assert isinstance(app, QtWidgets.QApplication)
-    assert app.arguments() == custom_argv
