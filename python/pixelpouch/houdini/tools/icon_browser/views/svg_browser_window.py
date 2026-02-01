@@ -14,7 +14,7 @@ from pixelpouch.houdini.tools.icon_browser.views import (
     SvgBrowserTab,
 )
 from pixelpouch.houdini.tools.icon_browser.views.ui_svg_browser_window import Ui_Form
-from pixelpouch.libs.core.logging import (
+from pixelpouch.libs.core.logging_factory import (
     PixelPouchLoggerFactory,
 )
 from pixelpouch.libs.core.qt.widgets import WheelTabBar

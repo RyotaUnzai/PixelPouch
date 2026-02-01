@@ -23,6 +23,7 @@
         "python.analysis.exclude": [
             "${workspaceFolder}/bin/**",
             "${workspaceFolder}/python/third_party/**",
+            "${workspaceFolder}/tests/**",
             "${workspaceFolder}/rez/**"
         ],
         "python.analysis.extraPaths": [
@@ -72,7 +73,6 @@
         // =========================
         // AI / Copilot
         // =========================
-        "github.copilot.chat.agent.currentEditorContext.enabled": false,
         "chat.disableAIFeatures": true
     }
 }

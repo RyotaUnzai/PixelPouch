@@ -4,7 +4,7 @@ import json
 from typing import TYPE_CHECKING, Mapping
 
 from pixelpouch.houdini.ops.svg_grouping import group_svgs_by_folder
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from pixelpouch.libs.core.utility import load_json
 
 if TYPE_CHECKING:

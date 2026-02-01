@@ -18,7 +18,7 @@ import psutil
 from pixelpouch.libs.core.environment_variable_key import (
     PixelPouchEnvironmentVariables,
 )
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 PP_ENV = PixelPouchEnvironmentVariables()

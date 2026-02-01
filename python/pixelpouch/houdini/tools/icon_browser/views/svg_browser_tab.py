@@ -18,7 +18,7 @@ from pixelpouch.houdini.tools.icon_browser.models.svg_filter_model import (
     SvgFilterProxyModel,
 )
 from pixelpouch.houdini.tools.icon_browser.views.ui_svg_browser_tab import Ui_Form
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from PySide6 import QtWidgets
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)

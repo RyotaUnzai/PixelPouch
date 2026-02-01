@@ -41,6 +41,7 @@ switch ($ext) {
 
 $uiDir = Split-Path $uiPath
 $pyFile = Join-Path $uiDir "$baseName.py"
+$workPyFile = Join-Path $uiDir "ui_$baseName.py"
 
 Write-Host "Resolved UI file: $uiPath"
 
@@ -66,7 +67,7 @@ if (-not (Test-Path $pyFile)) {
 # ------------------------------------------------------------
 
 Write-Host "=== Step 2: Generate .pyi stub ==="
-& "$PSScriptRoot/generate_stub_for_file.ps1" $pyFile
+& "$PSScriptRoot/generate_stub_for_file.ps1" $workPyFile
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Stub generation failed"

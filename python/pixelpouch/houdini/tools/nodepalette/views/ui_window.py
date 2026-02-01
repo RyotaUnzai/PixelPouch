@@ -15,7 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QSizePolicy, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QListWidget, QListWidgetItem, QSizePolicy,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -23,7 +24,14 @@ class Ui_Form(object):
             Form.setObjectName(u"Form")
         Form.resize(749, 899)
         self.verticalLayout = QVBoxLayout(Form)
+        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.listWidget = QListWidget(Form)
+        self.listWidget.setObjectName(u"listWidget")
+
+        self.verticalLayout.addWidget(self.listWidget)
+
 
         self.retranslateUi(Form)
 

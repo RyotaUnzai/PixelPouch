@@ -6,7 +6,7 @@ background color scheme for quick visual switching.
 """
 
 import hou
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 

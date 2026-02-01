@@ -6,7 +6,7 @@ to the first column and matches rows whose display text satisfies the
 current regular expression.
 """
 
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from PySide6 import QtCore
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)

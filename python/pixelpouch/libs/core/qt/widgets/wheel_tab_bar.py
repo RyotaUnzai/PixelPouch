@@ -1,6 +1,3 @@
-# pixelpouch/houdini/tools/icon_browser/widgets/wheel_tab_bar.py
-
-
 from PySide6 import QtGui, QtWidgets
 
 

@@ -9,7 +9,7 @@ import zipfile
 from collections import defaultdict
 from pathlib import Path
 
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 

@@ -10,7 +10,7 @@ from pixelpouch.houdini.tools.icon_browser.models import (
     SvgFilterProxyModel,
     SvgZipListModel,
 )
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from PySide6 import QtCore, QtGui, QtWidgets
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)

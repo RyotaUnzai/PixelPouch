@@ -112,14 +112,10 @@ class QssLoader:
         for block in ROOT_VAR_PATTERN.root_block.findall(content):
             for name, value in ROOT_VAR_PATTERN.variable.findall(block):
                 variables[name] = value.strip()
-
-            # remove :root block after extraction
             content = content.replace(block, "")
 
-        for name, value in variables.items():
-            content = ROOT_VAR_PATTERN.var_call.sub(
-                lambda m: value if m.group(1) == name else m.group(0),
-                content,
-            )
+        def replacer(m: re.Match[str]) -> str:
+            name = m.group(1)
+            return variables.get(name, m.group(0))
 
-        return content
+        return ROOT_VAR_PATTERN.var_call.sub(replacer, content)

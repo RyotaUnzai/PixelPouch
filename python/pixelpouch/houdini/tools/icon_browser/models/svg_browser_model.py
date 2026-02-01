@@ -8,7 +8,7 @@ the UI thread.
 
 from pathlib import Path
 
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from pixelpouch.libs.worker.svg_icon_worker import (
     SvgIconWorker,
 )

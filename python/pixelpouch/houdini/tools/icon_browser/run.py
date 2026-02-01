@@ -1,5 +1,8 @@
 import sys
 
+from pixelpouch.houdini.ops.window_policy import (
+    apply_standalone_window_policy,
+)
 from pixelpouch.houdini.tools.icon_browser.views.svg_browser_window import (
     HoudiniIconBrowserWindow,
 )
@@ -8,11 +11,8 @@ from pixelpouch.libs.core.environment_variable_key import (
     PixelPouchEnvironmentVariables,
 )
 from pixelpouch.libs.core.houdini import HoudiniEnvironmentVariables
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from pixelpouch.libs.core.qt.application import get_qapplication
-from pixelpouch.libs.core.qt.window_policy import (
-    apply_standalone_window_policy,
-)
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 

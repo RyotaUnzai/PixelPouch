@@ -1,7 +1,6 @@
 import json
-from functools import partial
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import hou
 from pixelpouch.houdini.tools.nodepalette.controller import NodePaletteController
@@ -12,16 +11,25 @@ from pixelpouch.houdini.tools.nodepalette.views.ui_window import Ui_Form
 from pixelpouch.houdini.tools.nodepalette.widget_factory import (
     WIDGET_FACTORY,
 )
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
-from PySide6 import QtWidgets
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
+from pixelpouch.libs.core.parsing.qss import loader
+from PySide6 import QtCore, QtWidgets
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 DATA_FILE = DATA_DIR / "node.json"
+QSS_FILE = DATA_DIR / "main.qss"
+
+SOP_CAT: hou.OpNodeTypeCategory = hou.sopNodeTypeCategory()
+QSSLOADER = loader.QssLoader(DATA_DIR)
 
 
 class NodePaletteWindow(QtWidgets.QWidget):
+    ICON_SIZE = 60
+    SPACING = 6
+    ITEM_SIZE = ICON_SIZE + SPACING
+
     def __init__(
         self,
         parent: Optional[QtWidgets.QWidget] = None,
@@ -30,47 +38,44 @@ class NodePaletteWindow(QtWidgets.QWidget):
 
         self._ui = Ui_Form()
         self._ui.setupUi(self)
+        self._ui.listWidget.setViewMode(QtWidgets.QListView.ViewMode.IconMode)
+        self._ui.listWidget.setResizeMode(QtWidgets.QListView.ResizeMode.Adjust)
+        self._ui.listWidget.setMovement(QtWidgets.QListView.Movement.Static)
+        self._ui.listWidget.setSpacing(self.SPACING)
+        self._ui.listWidget.setUniformItemSizes(True)
+        self._ui.listWidget.setIconSize(QtCore.QSize(self.ICON_SIZE, self.ICON_SIZE))
+        self._ui.listWidget.setGridSize(QtCore.QSize(self.ITEM_SIZE, self.ITEM_SIZE))
+        self._ui.listWidget.setStyleSheet(QSSLOADER.load(QSS_FILE))
 
         with open(DATA_FILE) as f:
-            data: dict = json.load(f)
+            data: dict[str, Any] = json.load(f)
+
         self.controller = NodePaletteController()
 
-        widget_list_model = WidgetListModel.model_validate(data)
+        self.widget_list_model = WidgetListModel.model_validate(data)
+        self._create_widgets()
+        self._setup_connections()
 
-        sop_cat = hou.sopNodeTypeCategory()
-        for widget_model in widget_list_model.widgets:
+    def _create_widgets(self) -> None:
+        for widget_model in self.widget_list_model.widgets:
             factory = WIDGET_FACTORY.get(widget_model.widget)
             if factory is None:
-                logger.error(
-                    "Unsupported widget type: %s",
-                    widget_model.widget,
-                )
+                logger.error(f"Unsupported widget type: {widget_model.widget}")
+                continue
+            node_type = hou.nodeType(SOP_CAT, widget_model.name)
+            if node_type is None:
+                logger.warning("NodeType not found: {widget_model.name}")
                 continue
 
-            widget = factory(widget_model.name)
-            if isinstance(widget, QtWidgets.QPushButton):
-                widget.clicked.connect(
-                    partial(self.controller.create, node_type=widget_model.name)
-                )
-                node_type = hou.nodeType(sop_cat, widget_model.name)
-                widget.setIcon(hou.qt.Icon("PLASMA_App"))
+            item = QtWidgets.QListWidgetItem()
+            item.setIcon(hou.qt.Icon(node_type.icon()))
+            item.setToolTip(node_type.description())
+            item.setData(QtCore.Qt.ItemDataRole.UserRole, node_type)
+            self._ui.listWidget.addItem(item)
 
-            self._ui.verticalLayout.addWidget(widget)
+    def _setup_connections(self) -> None:
+        self._ui.listWidget.itemClicked.connect(self._on_item_clicked)
 
-    def _on_create_clicked(self, node_type: str) -> None:
-        self.controller.create(node_type=node_type)
-
-
-"""
-import sys
-from importlib import reload
-
-for name, module in list(sys.modules.items()):
-    if "nodepalette" in name and module is not None:
-        try:
-            reload(module)
-            print(f"reloaded: {name}")
-        except Exception as e:
-            print(f"failed: {name} -> {e}")
-
-"""
+    def _on_item_clicked(self, item: QtWidgets.QListWidgetItem) -> None:
+        node_type: hou.NodeType = item.data(QtCore.Qt.ItemDataRole.UserRole)
+        self.controller.create(node_type=node_type.name())

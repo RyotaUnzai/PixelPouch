@@ -10,7 +10,7 @@ import zipfile
 from pathlib import Path
 from typing import Iterable
 
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from PySide6 import QtCore, QtGui
 from PySide6.QtSvg import QSvgRenderer
 
