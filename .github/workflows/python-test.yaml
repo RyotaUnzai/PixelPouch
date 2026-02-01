@@ -31,4 +31,4 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/python
         run: |
-          uv run pytest -m "not qt"
+          uv run pytest --ignore=tests/libs/core/qt
