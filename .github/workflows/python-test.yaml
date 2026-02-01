@@ -25,9 +25,10 @@ jobs:
       - name: Install test dependencies (uv, system)
         run: |
           uv pip install --system pytest
+          uv pip install --system PySide6
 
       - name: Run QSS core tests
         env:
           PYTHONPATH: ${{ github.workspace }}/python
         run: |
-          uv run pytest tests/libs/core/parsing/qss
+          uv run pytest
