@@ -38,16 +38,6 @@ IF ERRORLEVEL 1 (
 )
 echo [DONE] Python %PY_VERSION% downloaded successfully
 
-REM Creating venv
-echo [INFO] Using "%PYTHON_EXE%" to create venv at "%CD%\.venv"
-if exist "%CD%\.venv" (
-    echo Existing .venv found. Removing it...
-    rmdir /s /q "%CD%\.venv"
-)
-echo [CREATE] Creating virtual environment .venv...
-%PYTHON_EXE% -m venv .venv
-set ERR=%ERRORLEVEL%
-echo [DONE] .venv created successfully.
 
 popd
 exit /b %ERR%

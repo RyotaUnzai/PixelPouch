@@ -22,6 +22,12 @@ mypy_path = "python/"
 python_version = "3.11"
 strict = true
 
+[tool.pytest.ini_options]
+markers = [
+  "houdini: requires SideFX Houdini environment",
+]
+testpaths = ["tests"]
+
 [[tool.mypy.overrides]]
 ignore_missing_imports = false
 module = ["PySide6.*"]

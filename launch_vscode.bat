@@ -3,6 +3,7 @@
 
 SET PROJECT_ROOT=%~dp0
 FOR %%I IN (.) DO SET PROJECT_NAME=%%~nxI
+SET BIN_DIR=%PROJECT_ROOT%bin\
 
 
 :: Set up DCC environment
@@ -11,46 +12,30 @@ SET HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini 21.0.512
 :: Set up Rez environment
 set REZ_PACKAGES_PATH=%PROJECT_ROOT%rez\packages;%PROJECT_ROOT%rez\projects
 
-:: Set up Python environment
-SET PYENV=%PROJECT_ROOT%\.pyenv\pyenv-win
-SET PYENV_HOME=%PYENV%
-SET PYENV_ROOT=%PYENV%
-SET PATH=%PYENV%\shims;%PYENV%\bin;%PATH%
+:: Set up VSCode environment
+SET LOCAL_PIXELPOUCH_DIR=%LOCALAPPDATA%\PixelPouch\
+set VSCODE_DIR=%LOCAL_PIXELPOUCH_DIR%vscode\
+set VERSION_FILE=%BIN_DIR%vscode
+set /p VERSION=<"%VERSION_FILE%"
 
-:: Determine the latest version
-SET MAX_VERSION=
-SET MAX_PATH=
-
-for /D %%D in ("%PROJECT_ROOT%\bin\VSCode-win32-x64-*") do (
-    SET "DIR_NAME=%%~nxD"
-    SET "VERSION=!DIR_NAME:VSCode-win32-x64-=!"
-
-    REM Compare versions and find the highest one
-    if not defined MAX_VERSION (
-        SET "MAX_VERSION=!VERSION!"
-        SET "MAX_PATH=%%D"
-    ) else (
-        call :CompareVersions "!VERSION!" "!MAX_VERSION!" result
-        if "!result!"=="greater" (
-            SET "MAX_VERSION=!VERSION!"
-            SET "MAX_PATH=%%D"
-        )
-    )
+if "%VERSION%"=="" (
+    echo ERROR: VERSION is empty
+    exit /b 2
 )
 
 
-if defined MAX_PATH (
-    if not exist "%MAX_PATH%\data" (
-        echo [INFO] "%MAX_PATH%\data" does not exist. creating...
-        mkdir "%MAX_PATH%\data"
+if defined VSCODE_DIR (
+    if not exist "%VSCODE_DIR%data" (
+        echo [INFO] "%VSCODE_DIR%data" does not exist. creating...
+        mkdir "%VSCODE_DIR%data"
     ) else (
-        echo [INFO] "%TARGET_PATH%" already exists.
+        echo [INFO] "%VSCODE_DIR%" already exists.
     )
-    powershell -ExecutionPolicy Bypass -File "%PROJECT_ROOT%\bin\install_extensions.ps1"
-    copy %PROJECT_ROOT%\bin\settings.json "%MAX_PATH%\data\user-data\User\settings.json"
+    powershell -ExecutionPolicy Bypass -File "%BIN_DIR%install_extensions.ps1"
+    copy %PROJECT_ROOT%\bin\settings.json "%VSCODE_DIR%data\user-data\User\settings.json"
 
-    echo Launching VSCode version %MAX_VERSION%...
-    "%MAX_PATH%\Code.exe" --new-window  %PROJECT_ROOT%.vscode\%PROJECT_NAME%.code-workspace
+    echo Launching VSCode version %VERSION%...
+    "%VSCODE_DIR%Code.exe" --new-window  %PROJECT_ROOT%.vscode\%PROJECT_NAME%.code-workspace
 ) else (
     echo No VSCode installation found in bin folder.
 )

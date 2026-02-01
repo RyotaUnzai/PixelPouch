@@ -1,2 +1,12 @@
 # PixelPouch
-Pixelpouch is a personal collection of hotkeys, scripts, and small utilities designed to speed up and enhance workflows in tools. Think of it as a pocket-sized pouch filled with creative helpers - read to depoly when you need them.
+PixelPouch is a Technical Artist–oriented pipeline tool
+for developing, debugging, and running Python tools for DCC applications
+such as Houdini and Maya.
+
+It focuses on a VSCode-centric workflow and provides:
+- Python code execution from VSCode
+- debugpy-based debugger attachment to DCC processes
+- utility tools to improve daily TA workflows
+
+The goal of PixelPouch is to make DCC tool development
+faster, safer, and easier to maintain in real production environments.

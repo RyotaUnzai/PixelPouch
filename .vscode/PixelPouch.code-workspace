@@ -5,34 +5,47 @@
         }
     ],
     "settings": {
+        // =========================
+        // Files / Explorer
+        // =========================
         "files.exclude": {
-            "**bin**": true,
-            "**.venv**": true,
-            "**python\\third_party**": true,
+            "**/bin/**": true,
+            "**/.venv/**": true,
+            "**/python/third_party/**": true
         },
-        "python.analysis.exclude": [
-            "${workspaceFolder}\\bin\\**",
-            "${workspaceFolder}\\python\\third_party\\**",
-            "${workspaceFolder}\\rez\\*"
-        ],
+        // =========================
+        // Python - Interpreter
+        // =========================
         "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
-        "python.analysis.extraPaths": [
-            "${workspaceFolder}\\.venv\\Lib\\site-packages",
-            "${workspaceFolder}\\houdini\\python",
-            "${workspaceFolder}\\houdini\\scripts",
-            "${workspaceFolder}\\python"
+        // =========================
+        // Python - Analysis (Pylance)
+        // =========================
+        "python.analysis.exclude": [
+            "${workspaceFolder}/bin/**",
+            "${workspaceFolder}/python/third_party/**",
+            "${workspaceFolder}/rez/**"
         ],
-        "python.autoComplete.extraPaths": [
-            "${workspaceFolder}\\.venv\\Lib\\site-packages",
-            "${workspaceFolder}\\houdini\\python",
-            "${workspaceFolder}\\houdini\\scripts",
-            "${workspaceFolder}\\python"
+        "python.analysis.extraPaths": [
+            "${workspaceFolder}/python",
+            "${workspaceFolder}/houdini/python",
+            "${workspaceFolder}/houdini/scripts"
         ],
         "python.analysis.typeCheckingMode": "basic",
         "python.analysis.diagnosticMode": "openFilesOnly",
         "python.analysis.diagnosticSeverityOverrides": {
             "reportMissingModuleSource": "none"
         },
+        // =========================
+        // Python - Testing
+        // =========================
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestArgs": [
+            "tests"
+        ],
+        // =========================
+        // Python - Formatting / Lint
+        // =========================
         "[python]": {
             "editor.defaultFormatter": "ms-python.black-formatter",
             "editor.formatOnSave": true,
@@ -52,8 +65,14 @@
             "python"
         ],
         "mypy.configFile": "pyproject.toml",
+        // =========================
+        // Qt / PySide
+        // =========================
         "qt-ui.customWidgetsDesignerExePath": "${workspaceFolder}\\.venv\\Lib\\site-packages\\PySide6\\designer.exe",
+        // =========================
+        // AI / Copilot
+        // =========================
         "github.copilot.chat.agent.currentEditorContext.enabled": false,
-        "chat.disableAIFeatures": true,
+        "chat.disableAIFeatures": true
     }
 }
