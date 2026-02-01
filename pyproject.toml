@@ -24,8 +24,12 @@ python_version = "3.11"
 strict = true
 warn_return_any = true
 
-[mypy-tests.*]
+[tool.mypy."tests.*"]
 disallow_any_generics = false
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = false
+module = ["PySide6.*"]
 
 [tool.pytest.ini_options]
 markers = [
@@ -33,7 +37,3 @@ markers = [
   "qt: requires Qt / PySide6",
 ]
 testpaths = ["tests"]
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = false
-module = ["PySide6.*"]
