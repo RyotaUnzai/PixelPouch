@@ -30,4 +30,4 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/python
         run: |
-          uv run --system pytest tests/libs/core/parsing/qss
+          uv run pytest tests/libs/core/parsing/qss
