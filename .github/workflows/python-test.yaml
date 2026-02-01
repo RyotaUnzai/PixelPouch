@@ -22,12 +22,12 @@ jobs:
         with:
           version: "latest"
 
-      - name: Install test dependencies (uv)
+      - name: Install test dependencies (uv, system)
         run: |
-          uv pip install pytest
+          uv pip install --system pytest
 
       - name: Run QSS core tests
         env:
           PYTHONPATH: ${{ github.workspace }}/python
         run: |
-          uv run pytest tests/libs/core/parsing/qss
+          uv run --system pytest tests/libs/core/parsing/qss
