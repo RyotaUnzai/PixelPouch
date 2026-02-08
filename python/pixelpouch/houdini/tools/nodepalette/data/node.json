@@ -1,0 +1,64 @@
+{
+    "widgets": [
+        {
+            "name": "null",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "group",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "attribwrangle",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "attribcreate",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "attribexpression",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "filecache",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "add",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "xform",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "copytopoints",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "layoutbrushline",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "curve::2.0",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "mountain::2.0",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "voronoifracture",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "scatter::2.0",
+            "widget": "QPushButton"
+        },
+        {
+            "name": "convertvdb",
+            "widget": "QPushButton"
+        }
+    ]
+}

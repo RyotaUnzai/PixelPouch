@@ -1,4 +1,4 @@
-from . import api
+from pixelpouch.houdini.tools.nodepalette import api
 
 
 class NodePaletteController:

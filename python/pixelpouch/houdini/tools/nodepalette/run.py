@@ -1,10 +1,15 @@
-from PySide6 import QtCore
+from typing import Optional
 
-from .views.window import NodePaletteWindow
+from pixelpouch.houdini.tools.nodepalette.views.window import NodePaletteWindow
+from PySide6 import QtCore, QtWidgets
 
 
-def run(parent) -> None:
-    _window = NodePaletteWindow(parent)
-    _window.setWindowFlags(QtCore.Qt.Window)
-    _window.resize(300, 200)
-    _window.show()
+def run(parent: Optional[QtWidgets.QMainWindow] = None) -> None:
+    window = NodePaletteWindow(parent)
+    window.setWindowFlags(QtCore.Qt.WindowType.Window)
+    window.resize(300, 200)
+    window.show()
+
+
+if __name__ == "__main__":
+    run()

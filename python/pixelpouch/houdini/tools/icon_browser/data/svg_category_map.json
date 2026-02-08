@@ -1,0 +1,63 @@
+{
+    "Geometry": [
+        "SOP",
+        "OBJ",
+        "PRIMITIVES",
+        "PARTS",
+        "FUR",
+        "RIGGING"
+    ],
+    "FX": [
+        "DOP",
+        "POP",
+        "CROWDS",
+        "APEX"
+    ],
+    "Render": [
+        "ROP",
+        "SHOP",
+        "MTLX",
+        "IM",
+        "IMAGE"
+    ],
+    "Solaris": [
+        "LOP",
+        "SHOTBUILDER",
+        "SCENEGRAPH"
+    ],
+    "Compositing": [
+        "COP",
+        "COP2",
+        "Pics"
+    ],
+    "Animation": [
+        "CHOP",
+        "CHOPVIEW",
+        "CHANNELS",
+        "PLAYBAR",
+        "KEYS"
+    ],
+    "UI": [
+        "VIEW",
+        "NETVIEW",
+        "NETWORKS",
+        "PANETYPES",
+        "DESKTOP",
+        "DIALOG",
+        "SHELF",
+        "TOOLS",
+        "STATUS",
+        "NODEFLAGS",
+        "OBJ_STATE"
+    ],
+    "Technical": [
+        "DATA",
+        "DATATYPES",
+        "CONVERTED",
+        "COMMON",
+        "ENGINE",
+        "TOP",
+        "VOP",
+        "MISC"
+    ]
+}

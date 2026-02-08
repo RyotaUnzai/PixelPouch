@@ -9,11 +9,12 @@ from typing import Optional
 
 from pixelpouch.libs.core.debug import DebugpyRuntime, ProcessWatchdog
 from pixelpouch.libs.core.environment_variable_key import (
+    ExecutionContextEnv,
     PixelPouchEnv,
     PixelPouchEnvironmentVariables,
 )
 from pixelpouch.libs.core.houdini import HoudiniEnvironmentVariables
-from pixelpouch.libs.core.logging import PixelPouchLoggerFactory
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 HOU_ENV = HoudiniEnvironmentVariables()
@@ -34,7 +35,10 @@ def main() -> None:
         logger.info("PIXELPOUCH_DEBUGGER_ENABLE is False")
         return
 
-    if PP_ENV.PIXELPOUCH_ENV == PixelPouchEnv.DEV:
+    if (
+        PP_ENV.PIXELPOUCH_ENV == PixelPouchEnv.DEV
+        and PP_ENV.PIXELPOUCH_EXECUTION_CONTEXT == ExecutionContextEnv.HOUDINI
+    ):
         ready_file = PP_ENV.PIXELPOUCH_LOCAL_DATA_DIR / ".debugpy_ready"
 
         ProcessWatchdog(process_name="houdini.exe", ready_file=ready_file).start()

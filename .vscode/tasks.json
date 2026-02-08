@@ -2,6 +2,74 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "[UI] Generate .py + .pyi from current .ui",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\bin\\generate_py_and_stub_from_ui.ps1",
+                "${file}"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "[Stub] Generate stub for current file",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\bin\\generate_stub_for_file.ps1",
+                "${file}"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "[UI] Convert current .ui to .py",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\bin\\generate_py_from_ui.ps1",
+                "${file}"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Send Python to Houdini",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": [
+                "${workspaceFolder}\\python\\pixelpouch\\libs\\core\\debug\\client.py",
+                "${file}"
+            ],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
             "label": "[Release] Houdini",
             "type": "process",
             "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
@@ -10,6 +78,7 @@
                 "--",
                 "houdini.exe"
             ],
+            "group": "none",
             "presentation": {
                 "close": true,
                 "clear": true,
@@ -25,6 +94,25 @@
                 "--",
                 "houdini.exe"
             ],
+            "group": "test",
+            "presentation": {
+                "close": true,
+                "clear": true,
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "[Debug] Houdini log",
+            "type": "process",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "args": [
+                "pixelpouch_hou_dev",
+                "--verbose",
+                ">",
+                "rez.log",
+                "2>&1"
+            ],
+            "group": "test",
             "presentation": {
                 "close": true,
                 "clear": true,
@@ -35,18 +123,20 @@
             "label": "[Debug] Check rez env",
             "type": "process",
             "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "group": "test",
             "args": [
                 "--",
                 "powershell",
                 "-NoExit",
                 "-Command",
-                "echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem Q:\\Github\\PixelPouch\\rez\\projects"
+                "echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem ${workspaceFolder}\\rez\\projects"
             ]
         },
         {
             "label": "[Debug] Get Houdini Envs",
             "type": "process",
             "command": "${env:HOUDINI_LOCATION}\\bin\\hconfig.exe",
+            "group": "test",
             "args": [
                 "-a",
                 ">>",
@@ -69,6 +159,17 @@
                 "clear": true,
                 "reveal": "never"
             }
+        },
+        {
+            "label": "[VSCode] Export installed extensions",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "& '${env:LOCALAPPDATA}\\PixelPouch\\vscode\\bin\\code.cmd' --list-extensions --show-versions | Out-File -Encoding utf8 '${workspaceFolder}\\bin\\extensions.txt'"
+            ],
+            "problemMatcher": []
         }
     ]
 }

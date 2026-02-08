@@ -13,45 +13,28 @@ if (-not (Test-Path $ListFile)) {
     exit 1
 }
 
-# --- Auto-detect the latest portable VS Code in the same root as this script ---
-$VSCodeFolders =
-    Get-ChildItem -Path $ScriptRoot -Directory |
-    Where-Object { $_.Name -like "VSCode-win32-x64-*" } |
-    Sort-Object {
-        # Parse version from folder name: VSCode-win32-x64-<version>
-        $v = ($_.Name -replace '^VSCode-win32-x64-', '')
-        try { [version]$v } catch { [version]'0.0.0' }
-    } -Descending
+# Resolve VS Code (portable, fixed location)
+$VSCodeRoot = Join-Path $env:LOCALAPPDATA "PixelPouch\vscode"
+$Code       = Join-Path $VSCodeRoot "bin\code.cmd"
 
-if ($VSCodeFolders.Count -gt 0) {
-    $Code = Join-Path $VSCodeFolders[0].FullName "bin\code.cmd"
-    if (-not (Test-Path $Code)) {
-        Write-Error "code.cmd not found under: $($VSCodeFolders[0].FullName)\bin"
-        exit 1
-    }
-} else {
-    # Optional fallback to PATH "code" if no portable folder found
-    $CodeCmd = Get-Command code -ErrorAction SilentlyContinue
-    if ($null -ne $CodeCmd) {
-        $Code = $CodeCmd.Source
-    } else {
-        Write-Error "No VSCode-win32-x64-* folder found and 'code' not in PATH."
-        exit 1
-    }
+if (-not (Test-Path $Code)) {
+    Write-Error "VS Code CLI not found: $Code"
+    exit 1
 }
 
 Write-Host "Using VS Code CLI: $Code"
 
-# --- Collect already installed extensions (ID@version) ---
+# Collect already installed extensions (ID@version)
 $installedRaw = & $Code --list-extensions --show-versions
 $installed = @{}
+
 foreach ($line in $installedRaw) {
     if ($line -match '^(?<id>[^@]+)(@(?<ver>.+))?$') {
         $installed[$Matches.id.ToLower()] = $line.Trim()
     }
 }
 
-# --- Read targets from extensions.txt (ignore blanks and #comments) ---
+# Read targets from extensions.txt (ignore blanks and #comments)
 $targets =
     Get-Content -LiteralPath $ListFile |
     ForEach-Object { $_.Trim() } |

@@ -1,0 +1,14 @@
+:root {
+    --list-item-selected-bg: #d93535;
+    --list-item-hover-bg: #b75252;
+    --list-item-radius: 4px;
+}
+
+QListWidget::item:selected {
+    background: var(--list-item-selected-bg);
+    border-radius: var(--list-item-radius);
+}
+
+QListWidget::item:hover {
+    background: var(--list-item-hover-bg);
+}

@@ -15,13 +15,25 @@ select = ["F", "B", "I", "E", "W", "ANN", "TC"]
 [tool.mypy]
 exclude = [
   "ui_.*\\.py$",
+  "^tests/",
 ]
 explicit_package_bases = true
 ignore_missing_imports = true
 mypy_path = "python/"
 python_version = "3.11"
 strict = true
+warn_return_any = true
+
+[tool.mypy."tests.*"]
+disallow_any_generics = false
 
 [[tool.mypy.overrides]]
 ignore_missing_imports = false
 module = ["PySide6.*"]
+
+[tool.pytest.ini_options]
+markers = [
+  "houdini: requires SideFX Houdini environment",
+  "qt: requires Qt / PySide6",
+]
+testpaths = ["tests"]

@@ -1,4 +1,4 @@
-be5invis.toml@0.6.0
+﻿be5invis.toml@0.6.0
 charliermarsh.ruff@2025.24.0
 matangover.mypy@0.4.2
 ms-python.black-formatter@2025.2.0
@@ -8,5 +8,12 @@ ms-python.mypy-type-checker@2025.2.0
 ms-python.python@2025.12.0
 ms-python.vscode-pylance@2025.7.1
 ms-python.vscode-python-envs@1.2.0
-supernova-explosion.houdini-vex@0.0.6
+ms-vscode.cmake-tools@1.22.27
+ms-vscode.powershell@2025.4.0
 spmeesseman.vscode-taskexplorer@2.13.14
+supernova-explosion.houdini-vex@0.0.6
+theqtcompany.qt@1.3.0
+theqtcompany.qt-core@1.10.0
+theqtcompany.qt-cpp@1.10.0
+theqtcompany.qt-qml@1.10.0
+theqtcompany.qt-ui@1.11.1

@@ -5,11 +5,14 @@ to recursively expand environment variable placeholders in various data
 structures.
 """
 
+from __future__ import annotations
+
+import json
 import os
 import re
 import threading
 from pathlib import Path
-from typing import Any, ParamSpec, Self, TypeAlias
+from typing import Any, Mapping, ParamSpec, Self, TypeAlias
 
 P = ParamSpec("P")
 
@@ -86,3 +89,36 @@ def extract_environment_variables(
         return Path(new_path)
     else:
         return data
+
+
+def load_svg_category_map(path: Path) -> dict[str, set[str]]:
+    """
+    Load SVG category mapping from JSON.
+
+    Returns:
+        dict[str, set[str]] mapping category -> folder names
+    """
+    with path.open("r", encoding="utf-8") as f:
+        raw: Mapping[str, list[str]] = json.load(f)
+
+    return {category: set(folders) for category, folders in raw.items()}
+
+
+def load_json(path: Path | str) -> dict[str, Any]:
+    """
+    Load JSON file from disk.
+
+    Args:
+        path: Path to JSON file.
+
+    Returns:
+        Parsed JSON content.
+
+    Raises:
+        FileNotFoundError: If file does not exist.
+        json.JSONDecodeError: If JSON is invalid.
+    """
+    if isinstance(path, str):
+        path = Path(path)
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
