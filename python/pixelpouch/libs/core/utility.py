@@ -104,7 +104,7 @@ def load_svg_category_map(path: Path) -> dict[str, set[str]]:
     return {category: set(folders) for category, folders in raw.items()}
 
 
-def load_json(path: Path) -> dict[str, Any]:
+def load_json(path: Path | str) -> dict[str, Any]:
     """
     Load JSON file from disk.
 
@@ -118,5 +118,7 @@ def load_json(path: Path) -> dict[str, Any]:
         FileNotFoundError: If file does not exist.
         json.JSONDecodeError: If JSON is invalid.
     """
+    if isinstance(path, str):
+        path = Path(path)
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)

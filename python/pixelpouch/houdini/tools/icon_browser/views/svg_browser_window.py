@@ -103,6 +103,16 @@ class HoudiniIconBrowserWindow(QtWidgets.QWidget):
         current: QtCore.QModelIndex,
         _: QtCore.QModelIndex,
     ) -> None:
+        """Handles changes in the current selection of the view.
+
+        This method updates the selected item display based on the currently
+        selected index. If there is no active tab or the selection is invalid,
+        the selection display is cleared.
+
+        Args:
+            current: The currently selected model index.
+            _: The previously selected model index (unused).
+        """
         tab = self._current_tab()
         if not tab or not current.isValid():
             self._ui.lineEdit_selected_edit.clear()

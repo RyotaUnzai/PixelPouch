@@ -32,7 +32,7 @@ class SvgFilterProxyModel(QtCore.QSortFilterProxyModel):
     def filterAcceptsRow(
         self,
         source_row: int,
-        source_parent: QtCore.QModelIndex,
+        source_parent: QtCore.QModelIndex | QtCore.QPersistentModelIndex,
     ) -> bool:
         """Determines whether a source row should be included.
 

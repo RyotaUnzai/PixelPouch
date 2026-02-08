@@ -1,7 +1,6 @@
 import sys
 
-from PySide6.QtCore import QCoreApplication
-from PySide6.QtWidgets import QApplication
+from PySide6 import QtCore, QtWidgets
 
 
 class QtApplicationError(RuntimeError):
@@ -12,7 +11,7 @@ def get_qapplication(
     *,
     create_if_missing: bool = False,
     argv: list[str] | None = None,
-) -> QApplication:
+) -> QtWidgets.QApplication:
     """
     Return a QApplication instance in a safe and type-correct way.
 
@@ -34,7 +33,7 @@ def get_qapplication(
             - No Qt application exists and creation is disabled
             - QtWidgets is not available (QCoreApplication only)
     """
-    app = QCoreApplication.instance()
+    app = QtCore.QCoreApplication.instance()
 
     if app is None:
         if not create_if_missing:
@@ -42,9 +41,9 @@ def get_qapplication(
                 "QApplication is not initialized and auto-creation is disabled."
             )
 
-        return QApplication(argv or sys.argv)
+        return QtWidgets.QApplication(argv or sys.argv)
 
-    if not isinstance(app, QApplication):
+    if not isinstance(app, QtWidgets.QApplication):
         raise QtApplicationError(
             "QApplication is required, but only QCoreApplication is available."
         )

@@ -6,16 +6,26 @@ asynchronously using a worker and a global QThreadPool to avoid blocking
 the UI thread.
 """
 
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+from types import ModuleType
+from typing import TYPE_CHECKING, Optional
 
-from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
-from pixelpouch.libs.worker.svg_icon_worker import (
-    SvgIconWorker,
+from pixelpouch.libs.core.environment_variable_key import (
+    ExecutionContextEnv,
+    PixelPouchEnvironmentVariables,
 )
+from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
+from pixelpouch.libs.worker.svg_icon_worker import SvgIconWorker
 from PySide6 import QtCore, QtGui
 from PySide6.QtCore import QThreadPool
 
+if TYPE_CHECKING:
+    from types import ModuleType
+
+
 logger = PixelPouchLoggerFactory.get_logger(__name__)
+
+PP_ENV = PixelPouchEnvironmentVariables()
 
 
 class SvgZipListModel(QtCore.QAbstractListModel):
@@ -45,13 +55,26 @@ class SvgZipListModel(QtCore.QAbstractListModel):
         self._zip_path = zip_path
         self._svg_paths = svg_paths
         self._icon_size = icon_size
+
         self._icons: dict[int, QtGui.QIcon] = {}
-        self._thread_pool = QThreadPool.globalInstance()
         self._loading: set[int] = set()
+
+        self._thread_pool = QThreadPool.globalInstance()
+
+        # --------------------------------------------------
+        # Execution context detection (PixelPouch standard)
+        self._hou: Optional[ModuleType]
+
+        if PP_ENV.PIXELPOUCH_EXECUTION_CONTEXT == ExecutionContextEnv.HOUDINI:
+            import hou
+
+            self._hou = hou
+        else:
+            self._hou = None
 
     def rowCount(
         self,
-        parent: QtCore.QModelIndex | None = None,
+        parent: QtCore.QModelIndex | QtCore.QPersistentModelIndex | None = None,
     ) -> int:
         """Returns the number of rows in the model.
 
@@ -63,7 +86,11 @@ class SvgZipListModel(QtCore.QAbstractListModel):
         """
         return len(self._svg_paths)
 
-    def data(self, index: QtCore.QModelIndex, role: int) -> None | str:
+    def data(
+        self,
+        index: QtCore.QModelIndex | QtCore.QPersistentModelIndex,
+        role: int = QtCore.Qt.ItemDataRole.DisplayRole,
+    ) -> None | str:
         """Returns data for the given model index and role.
 
         Args:
@@ -76,8 +103,10 @@ class SvgZipListModel(QtCore.QAbstractListModel):
         if not index.isValid():
             return None
 
+        row = index.row()
+
         if role == QtCore.Qt.ItemDataRole.DisplayRole:
-            return self._svg_paths[index.row()]
+            return self._svg_paths[row]
 
         return None
 
@@ -93,27 +122,90 @@ class SvgZipListModel(QtCore.QAbstractListModel):
         return self._icons.get(row)
 
     def request_icon(self, row: int) -> None:
-        """Requests asynchronous icon generation for the given row.
+        """Requests asynchronous icon generation for the specified row.
 
-        If the icon is already loaded or currently being generated, this
-        method does nothing.
+        This method initiates icon loading if the icon has not already been
+        generated and is not currently being loaded. It first attempts to
+        retrieve the icon from Houdini, and if that fails, falls back to
+        generating the icon from an SVG file inside a zip archive.
 
         Args:
-            row: Row index of the SVG entry.
+            row: Index of the row corresponding to the SVG entry.
         """
         if row in self._icons or row in self._loading:
             return
 
         self._loading.add(row)
 
+        if self._try_houdini_icon(row):
+            return
+
+        self._request_zip_icon(row)
+
+    def _try_houdini_icon(self, row: int) -> bool:
+        """Attempts to load an icon using Houdini's built-in icon system.
+
+        If Houdini is available and the icon exists, the icon is stored,
+        the loading state is cleared, and the model is notified of the data
+        change.
+
+        Args:
+            row: Index of the row corresponding to the SVG entry.
+
+        Returns:
+            True if the icon was successfully loaded from Houdini; otherwise False.
+        """
+        if self._hou is None:
+            return False
+
+        name = self._make_houdini_icon_name(row)
+
+        try:
+            icon = self._hou.qt.Icon(name)
+        except self._hou.OperationFailed:
+            logger.debug("Houdini icon not found: %s", name)
+            return False
+
+        self._icons[row] = icon
+        self._loading.discard(row)
+
+        idx = self.index(row)
+        self.dataChanged.emit(idx, idx)
+        return True
+
+    def _request_zip_icon(self, row: int) -> None:
+        """Requests icon generation from an SVG file inside a zip archive.
+
+        This method creates a worker responsible for loading and rendering
+        the SVG icon asynchronously, connects its completion signal, and
+        schedules it on the thread pool.
+
+        Args:
+            row: Index of the row corresponding to the SVG entry.
+        """
         worker = SvgIconWorker(
-            row,
-            self._zip_path,
-            self._svg_paths[row],
-            self._icon_size,
+            row=row,
+            zip_path=self._zip_path,
+            svg_path_in_zip=self._svg_paths[row],
+            size=self._icon_size,
         )
         worker.signals.finished.connect(self._on_icon_ready)
         self._thread_pool.start(worker)
+
+    def _make_houdini_icon_name(self, row: int) -> str:
+        """Constructs a Houdini icon name from the SVG path at the given row.
+
+        The icon name is generated by combining the parent directory name
+        and the file stem of the SVG path.
+
+        Args:
+            row: Index of the row corresponding to the SVG entry.
+
+        Returns:
+            A string representing the Houdini icon name.
+        """
+        path = PurePosixPath(self._svg_paths[row])
+        return f"{path.parent.name}_{path.stem}"
 
     @QtCore.Slot(int, QtGui.QImage)
     def _on_icon_ready(self, row: int, image: QtGui.QImage) -> None:
