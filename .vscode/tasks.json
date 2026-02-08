@@ -159,6 +159,22 @@
                 "clear": true,
                 "reveal": "never"
             }
+        },
+        {
+            "label": "[VSCode] Export installed extensions",
+            "type": "shell",
+            "command": "code",
+            "args": [
+                "--list-extensions",
+                "--show-versuibs",
+                ">",
+                "${workspaceFolder}\\bin\\extensions.txt"
+            ],
+            "presentation": {
+                "close": true,
+                "clear": true,
+                "reveal": "never"
+            }
         }
     ]
 }
