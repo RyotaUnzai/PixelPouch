@@ -129,7 +129,7 @@
                 "powershell",
                 "-NoExit",
                 "-Command",
-                "echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem Q:\\Github\\PixelPouch\\rez\\projects"
+                "echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem ${workspaceFolder}\\rez\\projects"
             ]
         },
         {
@@ -163,18 +163,13 @@
         {
             "label": "[VSCode] Export installed extensions",
             "type": "shell",
-            "command": "code",
+            "command": "powershell",
             "args": [
-                "--list-extensions",
-                "--show-versuibs",
-                ">",
-                "${workspaceFolder}\\bin\\extensions.txt"
+                "-NoProfile",
+                "-Command",
+                "& '${env:LOCALAPPDATA}\\PixelPouch\\vscode\\bin\\code.cmd' --list-extensions --show-versions | Out-File -Encoding utf8 '${workspaceFolder}\\bin\\extensions.txt'"
             ],
-            "presentation": {
-                "close": true,
-                "clear": true,
-                "reveal": "never"
-            }
+            "problemMatcher": []
         }
     ]
 }
