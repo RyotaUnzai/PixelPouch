@@ -7,7 +7,23 @@ SET BIN_DIR=%PROJECT_ROOT%bin\
 
 
 :: Set up DCC environment
-SET HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini 21.0.512
+set HOUDINI_VERSION_FILE=%BIN_DIR%houdini
+if not exist "%HOUDINI_VERSION_FILE%" (
+    echo [ERROR] Houdini version file not found: %HOUDINI_VERSION_FILE%
+    exit /b 1
+)
+
+set /p HOUDINI_VERSION=<"%HOUDINI_VERSION_FILE%"
+
+if "%HOUDINI_VERSION%"=="" (
+    echo [ERROR] Houdini version is empty
+    exit /b 2
+)
+
+set HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini %HOUDINI_VERSION%
+
+echo HOUDINI_VERSION=%HOUDINI_VERSION%
+
 
 :: Set up Rez environment
 set REZ_PACKAGES_PATH=%PROJECT_ROOT%rez\packages;%PROJECT_ROOT%rez\projects

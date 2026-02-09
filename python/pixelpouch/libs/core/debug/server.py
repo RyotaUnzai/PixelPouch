@@ -113,7 +113,7 @@ class SendPythonServer:
             result = local_ns.get("result")
 
             return {
-                "status": "ok",
+                "status": "sucress",
                 "stdout": stdout_buf.getvalue(),
                 "stderr": stderr_buf.getvalue(),
                 "result": result,

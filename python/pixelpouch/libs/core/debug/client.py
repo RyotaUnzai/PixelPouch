@@ -133,20 +133,16 @@ def _main(argv: list[str]) -> int:
     stderr = response.get("stderr")
     result = response.get("result")
 
-    print("=== STATUS ===")
-    print(status)
+    logger.info(f"[STATUS]\n{status}")
 
     if stdout:
-        print("=== STDOUT ===")
-        print(stdout)
+        logger.info(f"[STDOUT]\n{stdout}")
 
     if stderr:
-        print("=== STDERR ===")
-        print(stderr)
+        logger.info(f"[STDERR]\n{stderr}")
 
     if result is not None:
-        print("=== RESULT ===")
-        print(result)
+        logger.info(f"[RESULT]\n{result}")
 
     return 0
 
