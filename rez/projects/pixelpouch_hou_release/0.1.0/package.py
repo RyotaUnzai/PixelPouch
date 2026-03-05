@@ -10,5 +10,6 @@ def commands():
     env.PIXELPOUCH_LOCATION = "{root}/../../../../"
     env.PIXELPOUCH_ENV = "release"
     env.PIXELPOUCH_EXECUTION_CONTEXT = "houdini"
+    env.PIPELINE_LOG_LEVEL = "INFO"
 
     # env.PIXELPOUCH_ENABLE_EXPERIMENTAL = "1"
