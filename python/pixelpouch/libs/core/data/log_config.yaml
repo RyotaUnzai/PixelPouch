@@ -18,10 +18,10 @@ handlers:
     mode: w
     encoding: utf-8
 loggers:
-  MaterialKit:
-    level: DEBUG
+  pipeline:
+    level: ${PIPELINE_LOG_LEVEL} 
     handlers: [console, file]
     propagate: no
 root:
-  level: DEBUG
+  level: ${PIPELINE_LOG_LEVEL}
   handlers: [console, file]
