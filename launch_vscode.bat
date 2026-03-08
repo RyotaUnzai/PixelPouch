@@ -27,6 +27,8 @@ echo HOUDINI_VERSION=%HOUDINI_VERSION%
 
 :: Set up Rez environment
 set REZ_PACKAGES_PATH=%PROJECT_ROOT%rez\packages;%PROJECT_ROOT%rez\projects
+set REZ_LOCATION=%PROJECT_ROOT%.venv\Scripts
+set PATH=%REZ_LOCATION%;%PATH%
 
 :: Set up VSCode environment
 SET LOCAL_PIXELPOUCH_DIR=%LOCALAPPDATA%\PixelPouch\
