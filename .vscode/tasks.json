@@ -72,11 +72,12 @@
         {
             "label": "[Release] Houdini",
             "type": "process",
-            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "command": "powershell",
             "args": [
-                "pixelpouch_hou_release",
-                "--",
-                "houdini.exe"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe pixelpouch_hou_release -- houdini.exe"
             ],
             "group": "none",
             "presentation": {
@@ -104,13 +105,12 @@
         {
             "label": "[Debug] Houdini log",
             "type": "process",
-            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
+            "command": "powershell",
             "args": [
-                "pixelpouch_hou_dev",
-                "--verbose",
-                ">",
-                "rez.log",
-                "2>&1"
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe pixelpouch_hou_dev --verbose > rez.log 2>&1"
             ],
             "group": "test",
             "presentation": {
@@ -122,15 +122,13 @@
         {
             "label": "[Debug] Check rez env",
             "type": "process",
-            "command": "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe",
-            "group": "test",
+            "command": "powershell",
             "args": [
-                "--",
-                "powershell",
-                "-NoExit",
+                "-ExecutionPolicy",
+                "Bypass",
                 "-Command",
-                "echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem ${workspaceFolder}\\rez\\projects"
-            ]
+                "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe -- powershell -NoExit -Command \"echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem ${workspaceFolder}\\rez\\projects\""
+            ],
         },
         {
             "label": "[Debug] Get Houdini Envs",
