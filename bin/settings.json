@@ -5,5 +5,18 @@
     // VSCode
     // =========================
     "extensions.autoUpdate": false,
-    "extensions.autoCheckUpdates": false
+    "extensions.autoCheckUpdates": false,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.env.windows": {
+        "POWERSHELL_EXECUTIONPOLICY": "Bypass"
+    }
 }
