@@ -1,4 +1,9 @@
 {
     "security.workspace.trust.untrustedFiles": "open",
     "python.terminal.activateEnvInCurrentTerminal": true,
+    // =========================
+    // VSCode
+    // =========================
+    "extensions.autoUpdate": false,
+    "extensions.autoCheckUpdates": false
 }

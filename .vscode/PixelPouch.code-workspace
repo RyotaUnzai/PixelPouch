@@ -17,18 +17,23 @@
         // Python - Interpreter
         // =========================
         "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "terminal.integrated.defaultProfile.windows": "Command Prompt",
         // =========================
         // Python - Analysis (Pylance)
         // =========================
         "python.analysis.exclude": [
             "${workspaceFolder}/bin/**",
             "${workspaceFolder}/python/third_party/**",
+            "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\houdini",
+            // "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\houdini\\python3.11libs",
             "${workspaceFolder}/tests/**",
             "${workspaceFolder}/rez/**"
         ],
         "python.analysis.extraPaths": [
             "${workspaceFolder}/python",
             "${workspaceFolder}/houdini/python",
+            "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\houdini",
+            // "C:\\Program Files\\Side Effects Software\\Houdini 21.0.512\\houdini\\python3.11libs",
             "${workspaceFolder}/houdini/scripts"
         ],
         "python.analysis.typeCheckingMode": "basic",
@@ -73,6 +78,6 @@
         // =========================
         // AI / Copilot
         // =========================
-        "chat.disableAIFeatures": true
+        "chat.disableAIFeatures": true,
     }
 }
