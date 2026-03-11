@@ -8,4 +8,4 @@ def commands():
     env.HYTHON_LOCATION.append("{env.HOUDINI_LOCATION}/bin/hython.exe")
     env.HOUDINI_PATH.append("{root}/../../../../houdini;&")
     env.HOUDINI_TOOLBAR_PATH.append("{root}/../../../../houdini/toolbar;@/^")
-    env.HOUDINI_OTLSCAN_PATH.append("{root}/../../../../houdini/otls;")
+    env.HOUDINI_OTLSCAN_PATH.append("{root}/../../../../houdini/otls;&")
