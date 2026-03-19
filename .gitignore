@@ -219,6 +219,8 @@ dev_*.py
 *nuget.exe
 
 # Houdini
+houdini/fonts/*.otf
+houdini/fonts/*.ttf
 houdini/config
 houdini/otls/backup/
 houdini/toolbar
