@@ -10,7 +10,37 @@
     <memberTool name="tool_nodepalette"/>
     <memberTool name="tool_icon_browser"/>
     <memberTool name="tool_reload"/>
+    <memberTool name="font_mapper"/>
   </toolshelf>
+
+  <tool name="tool_icon_browser" label="Icon Browser" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import launch_icon_viewer
+launch_icon_viewer.launch()]]></script>
+  </tool>
+
+  <tool name="tool_reload" label="Force Reload Tools" icon="$HIP/houdini/icons/force_reload.svg">
+    <script scriptType="python"><![CDATA[import sys
+from importlib import reload
+
+TARGET_KEYWORDS: list[str] = [
+    "nodepalette",
+    "icon_browser",
+    "houdini.ops",
+]
+
+
+for name, module in list(sys.modules.items()):
+    if module is None:
+        continue
+
+    if any(keyword in name for keyword in TARGET_KEYWORDS):
+        try:
+            reload(module)
+            print(f"reloaded: {name}")
+        except Exception as e:
+            print(f"failed: {name} -> {e}")
+]]></script>
+  </tool>
 
   <tool name="toggle_viewport_background" label="Toggle Viewport" icon="Q:/Github/PixelPouch/houdini/hotkeys/toggle_viewport_background.svg">
     <script scriptType="python"><![CDATA[import hou
