@@ -31,7 +31,31 @@ if defined LOCAL_PIXELPOUCH_DIR (
 
 
 :: Set up DCC environment
-SET HOUDINI_LOCATION="C:\Program Files\Side Effects Software\Houdini 21.0.512\"
+set HOUDINI_VERSION_FILE=%BIN_DIR%houdini
+if not exist "%HOUDINI_VERSION_FILE%" (
+    echo [ERROR] Houdini version file not found: %HOUDINI_VERSION_FILE%
+    exit /b 1
+)
+
+set /p HOUDINI_VERSION=<"%HOUDINI_VERSION_FILE%"
+
+if "%HOUDINI_VERSION%"=="" (
+    echo [ERROR] Houdini version is empty
+    exit /b 2
+)
+
+set HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini %HOUDINI_VERSION%
+
+
+:: Download fonts
+echo [STEP] Downloading fonts
+cmd /c "%BIN_DIR%download_fonts.bat"
+IF ERRORLEVEL 1 (
+  echo [ERROR] Fonts setup failed
+  goto :EOF
+)
+echo [DONE] Fonts setup completed
+
 
 :: Download VSCode
 echo [STEP] Downloading VSCode

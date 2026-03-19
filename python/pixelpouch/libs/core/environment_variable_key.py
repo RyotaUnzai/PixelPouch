@@ -49,6 +49,7 @@ class EnvironmentVariableKey(StrEnum):
     PIXELPOUCH_LOCATION = "PIXELPOUCH_LOCATION"
     PIXELPOUCH_ENV = "PIXELPOUCH_ENV"
     PIXELPOUCH_EXECUTION_CONTEXT = "PIXELPOUCH_EXECUTION_CONTEXT"
+    PIPELINE_LOG_LEVEL = "PIPELINE_LOG_LEVEL"
 
     # dev-only
     PIXELPOUCH_DEBUGGER_ENABLE = "PIXELPOUCH_DEBUGGER_ENABLE"
@@ -82,7 +83,7 @@ class PixelPouchEnvironmentVariables(AppEnvironmentVariables):
         )
         self.__PIXELPOUCH_LOCATION: Path = self._read_path(
             self._env, EnvironmentVariableKey.PIXELPOUCH_LOCATION
-        )
+        ).resolve()
 
         self.__PIXELPOUCH_ENV: str = self._read_str(
             self._env, EnvironmentVariableKey.PIXELPOUCH_ENV

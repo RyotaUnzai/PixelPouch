@@ -9,3 +9,4 @@ def commands():
     env.HOUDINI_PATH.append("{root}/../../../../houdini;&")
     env.HOUDINI_TOOLBAR_PATH.append("{root}/../../../../houdini/toolbar;@/^")
     env.HOUDINI_OTLSCAN_PATH.append("{root}/../../../../houdini/otls;&")
+    env.HOUDINI_PACKAGE_DIR.append("{root}/../../../../houdini/packages;&")

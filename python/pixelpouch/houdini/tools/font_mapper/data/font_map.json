@@ -1,0 +1,7 @@
+{
+    "Black": { "fontfamily": "Noto Sans JP", "style": "Bold" },
+    "Proportional": { "fontfamily": "Noto Sans JP", "style": "Regular" },
+    "Proportional-CJK": { "fontfamily": "Noto Sans JP", "style": "Regular" },
+    "Fixed": { "fontfamily": "JetBrains Mono", "style": "Regular" },
+    "Fixed-CJK": { "fontfamily": "Noto Sans CJK JP", "style": "Regular" }
+}
