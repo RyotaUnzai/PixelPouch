@@ -9,14 +9,17 @@ from pixelpouch.libs.core.environment_variable_key import (
     ExecutionContextEnv,
     PixelPouchEnvironmentVariables,
 )
+from pixelpouch.libs.core.houdini.hou_environment_variables import (
+    HoudiniEnvironmentVariables,
+)
 from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 from pixelpouch.libs.core.qt.application import get_qapplication
 from PySide6 import QtCore, QtWidgets
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 
-PP_ENV = PixelPouchEnvironmentVariables()
-_HOUDINI_FONTS_DIR = PP_ENV.PIXELPOUCH_LOCATION / "houdini" / "fonts"
+HOU_ENV = HoudiniEnvironmentVariables()
+_HOUDINI_FONTS_DIR = HOU_ENV.HOUDINI_USER_PREF_DIR / "fonts"
 
 
 def run(parent: Optional[QtWidgets.QMainWindow] = None) -> None:

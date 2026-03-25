@@ -1,15 +1,15 @@
 @echo off
 REM Download fonts for PixelPouch Houdini project
-REM This script downloads fonts to ...\PixelPouch\houdini\fonts
+REM This script downloads fonts to ...\PixelPouch\houdini<version>\fonts
 
 setlocal enabledelayedexpansion
 
 REM Define the target directory relative to script location
 REM Script location: ...\PixelPouch\bin\download_fonts.bat
-REM Target: ...\PixelPouch\houdini\fonts
+REM Target: ...\PixelPouch\houdini21.0\fonts
 set "SCRIPT_DIR=%~dp0"
 for %%A in ("!SCRIPT_DIR!..") do set "PARENT_DIR=%%~fA"
-set "FONT_DIR=!PARENT_DIR!\houdini\fonts"
+set "FONT_DIR=!PARENT_DIR!\houdini21.0\fonts"
 
 REM Create the fonts directory if it doesn't exist
 if not exist "!FONT_DIR!" (

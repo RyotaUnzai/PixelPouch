@@ -27,6 +27,7 @@ class HoudiniEnvironmentVariableKey(StrEnum):
     HYTHON_LOCATION = "HYTHON_LOCATION"
     HOUDINI_PATH = "HOUDINI_PATH"
     HOUDINI_TOOLBAR_PATH = "HOUDINI_TOOLBAR_PATH"
+    HOUDINI_USER_PREF_DIR = "HOUDINI_USER_PREF_DIR"
 
 
 class HoudiniEnvironmentVariables(AppEnvironmentVariables):
@@ -59,6 +60,19 @@ class HoudiniEnvironmentVariables(AppEnvironmentVariables):
         self.__HOUDINI_TOOLBAR_PATH: Sequence[Path] = self._read_path_list(
             env, HoudiniEnvironmentVariableKey.HOUDINI_TOOLBAR_PATH
         )
+        self.__HOUDINI_USER_PREF_DIR: Path = self._read_path(
+            env, HoudiniEnvironmentVariableKey.HOUDINI_USER_PREF_DIR
+        )
+
+    @property
+    def HOUDINI_USER_PREF_DIR(self) -> Path:
+        """Returns the directory to store user preference files.
+
+        Returns:
+            A sequence of paths configured in the HOUDINI_USER_PREF_DIR
+            environment variable.
+        """
+        return self.__HOUDINI_USER_PREF_DIR
 
     @property
     def HOUDINI_LOCATION(self) -> Path:

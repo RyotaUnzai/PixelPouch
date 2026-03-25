@@ -1,6 +1,0 @@
-# A flat list of UI font usage to font name mappings
-Black			"Noto Sans CJK JP Bold"
-Proportional		"Noto Sans CJK JP"
-Proportional-CJK	"Noto Sans CJK JP"
-Fixed			"JetBrains Mono"
-Fixed-CJK		"Noto Sans CJK JP"
