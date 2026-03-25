@@ -9,6 +9,7 @@ SET PIPELINE_LOG_LEVEL=DEBUG
 
 :: Set up DCC environment
 set HOUDINI_VERSION_FILE=%BIN_DIR%houdini
+
 if not exist "%HOUDINI_VERSION_FILE%" (
     echo [ERROR] Houdini version file not found: %HOUDINI_VERSION_FILE%
     exit /b 1
