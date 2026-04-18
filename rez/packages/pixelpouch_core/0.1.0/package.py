@@ -1,19 +1,9 @@
 name = "pixelpouch_core"
 version = "0.1.0"
 
+
 def commands():
-    env.PYTHONPATH.append(
-        "{root}/../../../../python"
-    )
-
-    env.PYTHONPATH.append(
-        "{root}/../../../../python/third_party"
-    )
-
-    env.PYTHONPATH.append(
-        "{root}/../../../../houdini/python"
-    )
-
-    env.PYTHONPATH.append(
-        "{root}/../../../../houdini/hotkeys"
-    )
+    env.PYTHONPATH.append("{env.PIXELPOUCH_LOCATION}python")
+    env.PYTHONPATH.append("{env.PIXELPOUCH_LOCATION}python/third_party")
+    env.PYTHONPATH.append("{env.PIXELPOUCH_LOCATION}houdini/python")
+    env.PYTHONPATH.append("{env.PIXELPOUCH_LOCATION}houdini/hotkeys")
