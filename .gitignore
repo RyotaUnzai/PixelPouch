@@ -217,6 +217,9 @@ bin/python/
 python/third_party/
 dev_*.py
 *nuget.exe
+resources/
+python/pixelpouch/resources/
+python/obsidian_houdini_nodes_viewer/resources/
 
 # Houdini
 houdini*/fonts/*.otf
