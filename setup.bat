@@ -49,7 +49,7 @@ set HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini %HOUDINI_VER
 
 :: Download resources
 echo [STEP] Downloading resources
-powershell -NoProfile -ExecutionPolicy Bypass -File "%BIN_DIR%setup_resources.ps1" -ProjectRoot "%PROJECT_ROOT:~0,-1%"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%BIN_DIR%setup_resources.ps1"
 IF ERRORLEVEL 1 (
   echo [ERROR] Resources setup failed
   goto :EOF
