@@ -1,0 +1,135 @@
+{
+  "entries": [
+    {
+      "name": "fluent_system_icons",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Add/SVG/ic_fluent_add_24_regular.svg",
+          "destination": "icons/fluent/add_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Add/SVG/ic_fluent_add_24_filled.svg",
+          "destination": "icons/fluent/add_24_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Copy/SVG/ic_fluent_copy_24_regular.svg",
+          "destination": "icons/fluent/copy_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Camera/SVG/ic_fluent_camera_24_regular.svg",
+          "destination": "icons/fluent/camera_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Crop/SVG/ic_fluent_crop_24_regular.svg",
+          "destination": "icons/fluent/crop_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Delete/SVG/ic_fluent_delete_24_regular.svg",
+          "destination": "icons/fluent/delete_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Image/SVG/ic_fluent_image_24_regular.svg",
+          "destination": "icons/fluent/image_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Save/SVG/ic_fluent_save_24_regular.svg",
+          "destination": "icons/fluent/save_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Checkmark/SVG/ic_fluent_checkmark_24_regular.svg",
+          "destination": "icons/fluent/checkmark_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Closed/SVG/ic_fluent_lock_closed_20_regular.svg",
+          "destination": "icons/fluent/lock_closed_20_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Closed/SVG/ic_fluent_lock_closed_20_filled.svg",
+          "destination": "icons/fluent/lock_closed_20_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Closed/SVG/ic_fluent_lock_closed_24_regular.svg",
+          "destination": "icons/fluent/lock_closed_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Closed/SVG/ic_fluent_lock_closed_24_filled.svg",
+          "destination": "icons/fluent/lock_closed_24_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Open/SVG/ic_fluent_lock_open_20_regular.svg",
+          "destination": "icons/fluent/lock_open_20_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Open/SVG/ic_fluent_lock_open_20_filled.svg",
+          "destination": "icons/fluent/lock_open_20_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Open/SVG/ic_fluent_lock_open_24_regular.svg",
+          "destination": "icons/fluent/lock_open_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Lock%20Open/SVG/ic_fluent_lock_open_24_filled.svg",
+          "destination": "icons/fluent/lock_open_24_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Folder%20Open/SVG/ic_fluent_folder_open_20_regular.svg",
+          "destination": "icons/fluent/folder_open_20_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Folder%20Open/SVG/ic_fluent_folder_open_20_filled.svg",
+          "destination": "icons/fluent/folder_open_20_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Folder%20Open/SVG/ic_fluent_folder_open_24_regular.svg",
+          "destination": "icons/fluent/folder_open_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Folder%20Open/SVG/ic_fluent_folder_open_24_filled.svg",
+          "destination": "icons/fluent/folder_open_24_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Export/SVG/ic_fluent_arrow_export_20_regular.svg",
+          "destination": "icons/fluent/arrow_export_20_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Export/SVG/ic_fluent_arrow_export_20_filled.svg",
+          "destination": "icons/fluent/arrow_export_20_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Export/SVG/ic_fluent_arrow_export_24_regular.svg",
+          "destination": "icons/fluent/arrow_export_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Export/SVG/ic_fluent_arrow_export_24_filled.svg",
+          "destination": "icons/fluent/arrow_export_24_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Reset/SVG/ic_fluent_arrow_reset_20_regular.svg",
+          "destination": "icons/fluent/arrow_reset_20_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Reset/SVG/ic_fluent_arrow_reset_20_filled.svg",
+          "destination": "icons/fluent/arrow_reset_20_filled.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Reset/SVG/ic_fluent_arrow_reset_24_regular.svg",
+          "destination": "icons/fluent/arrow_reset_24_regular.svg"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Arrow%20Reset/SVG/ic_fluent_arrow_reset_24_filled.svg",
+          "destination": "icons/fluent/arrow_reset_24_filled.svg"
+        }
+      ],
+      "license_files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/LICENSE",
+          "destination": "licenses/fluentui-system-icons/LICENSE.txt"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/README.md",
+          "destination": "licenses/fluentui-system-icons/README.md"
+        }
+      ]
+    }
+  ]
+}

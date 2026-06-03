@@ -21,6 +21,13 @@ if ([string]::IsNullOrWhiteSpace($ManifestPath)) {
     $ManifestPath = Join-Path $scriptRoot "resources_manifest.json"
 }
 
+$ProjectRoot = $ProjectRoot.Trim('"')
+if ($ProjectRoot.EndsWith('\')) {
+    $ProjectRoot = $ProjectRoot.TrimEnd('\')
+}
+
+$ManifestPath = $ManifestPath.Trim('"')
+
 $ProjectRoot = [System.IO.Path]::GetFullPath($ProjectRoot)
 $ResourcesRoot = Join-Path $ProjectRoot "python\pixelpouch\resources"
 $ManagedIconRoot = Join-Path $ResourcesRoot "icons\fluent"
