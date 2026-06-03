@@ -70,6 +70,60 @@
             "problemMatcher": []
         },
         {
+            "label": "[Obsidian] Deploy houdini-nodes-viewer to MyNote",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\bin\\deploy_obsidian_houdini_nodes_viewer_to_vault.ps1"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "[Release] Build Obsidian Houdini Nodes Viewer",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}\\.venv\\Scripts\\python.exe' '${workspaceFolder}\\bin\\build_obsidian_houdini_nodes_viewer_release.py'"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "[Release] Verify Obsidian Houdini Nodes Viewer (clean import)",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& '${workspaceFolder}\\.venv\\Scripts\\python.exe' '${workspaceFolder}\\bin\\verify_obsidian_houdini_nodes_viewer_release.py'"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
             "label": "[Release] Houdini",
             "type": "process",
             "command": "powershell",
@@ -128,7 +182,7 @@
                 "Bypass",
                 "-Command",
                 "${workspaceFolder}\\.venv\\Scripts\\rez-env.exe -- powershell -NoExit -Command \"echo 'PWD:'; pwd; echo 'REZ_PACKAGES_PATH:'; echo $Env:REZ_PACKAGES_PATH; echo 'FILES:'; Get-ChildItem ${workspaceFolder}\\rez\\projects\""
-            ],
+            ]
         },
         {
             "label": "[Debug] Get Houdini Envs",

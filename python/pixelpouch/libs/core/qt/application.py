@@ -1,4 +1,5 @@
 import sys
+from typing import List, Optional
 
 from PySide6 import QtCore, QtWidgets
 
@@ -10,7 +11,7 @@ class QtApplicationError(RuntimeError):
 def get_qapplication(
     *,
     create_if_missing: bool = False,
-    argv: list[str] | None = None,
+    argv: Optional[List[str]] = None,
 ) -> QtWidgets.QApplication:
     """
     Return a QApplication instance in a safe and type-correct way.

@@ -6,6 +6,7 @@ SET PIXELPOUCH_LOCATION=%~dp0
 FOR %%I IN (.) DO SET PROJECT_NAME=%%~nxI
 SET BIN_DIR=%PROJECT_ROOT%bin\
 SET PIPELINE_LOG_LEVEL=DEBUG
+SET QT_QPA_PLATFORM=windows:darkmode=0
 
 
 :: Set up DCC environment
@@ -26,6 +27,25 @@ if "%HOUDINI_VERSION%"=="" (
 set HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini %HOUDINI_VERSION%
 
 echo HOUDINI_VERSION=%HOUDINI_VERSION%
+
+set MAYA_VERSION_FILE=%BIN_DIR%MAYA
+
+if not exist "%MAYA_VERSION_FILE%" (
+    echo [ERROR] MAYA version file not found: %MAYA_VERSION_FILE%
+    exit /b 1
+)
+
+set /p MAYA_VERSION=<"%MAYA_VERSION_FILE%"
+
+if "%MAYA_VERSION%"=="" (
+    echo [ERROR] MAYA version is empty
+    exit /b 2
+)
+
+set MAYA_LOCATION=C:\Program Files\Autodesk\Maya
+
+echo MAYA_VERSION=%MAYA_VERSION%
+
 
 
 :: Set up Rez environment

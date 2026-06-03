@@ -1,11 +1,7 @@
 from typing import Protocol
 
+from hou_wrapper import hou
 from PySide6 import QtCore, QtWidgets
-
-try:
-    import hou
-except ImportError:
-    hou = None
 
 
 class QtWindowProtocol(Protocol):
@@ -34,11 +30,12 @@ def apply_standalone_window_policy(
             If True, embed into Houdini UI.
             If False, force standalone window behavior.
     """
-    if hou is None:
+    main_window_getter = getattr(getattr(hou, "qt", None), "mainWindow", None)
+    if not callable(main_window_getter):
         return
 
     if not embed_in_houdini:
-        main_window = hou.qt.mainWindow()
-        if main_window is not None:
+        main_window = main_window_getter()
+        if isinstance(main_window, QtWidgets.QWidget):
             window.setParent(main_window)
             window.setWindowFlags(QtCore.Qt.WindowType.Window)

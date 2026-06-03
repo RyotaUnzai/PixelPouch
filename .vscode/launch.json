@@ -8,7 +8,8 @@
             "name": "Python Debugger: Current File (PixelPouch)",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/bin/debug_current_file.py",
+            "args": ["${file}"],
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "env": {

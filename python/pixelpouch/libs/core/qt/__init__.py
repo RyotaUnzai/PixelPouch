@@ -1,7 +1,18 @@
+from typing import List, Optional
+
 import sys
 
 from PySide6.QtCore import QCoreApplication
 from PySide6.QtWidgets import QApplication
+
+from .icons import (
+    QFluentSystemIconSource,
+    QFontIconSourceBase,
+    QIconBackendBase,
+    QIconResourceResolver,
+    QIconSpec,
+    QSvgIconSourceBase,
+)
 
 
 class QtApplicationError(RuntimeError):
@@ -11,7 +22,7 @@ class QtApplicationError(RuntimeError):
 def get_qapplication(
     *,
     create_if_missing: bool = False,
-    argv: list[str] | None = None,
+    argv: Optional[List[str]] = None,
 ) -> QApplication:
     """
     Return a QApplication instance in a safe and type-correct way.
@@ -50,3 +61,17 @@ def get_qapplication(
         )
 
     return app
+
+
+__all__ = [
+    "QApplication",
+    "QCoreApplication",
+    "QFluentSystemIconSource",
+    "QFontIconSourceBase",
+    "QIconBackendBase",
+    "QIconResourceResolver",
+    "QIconSpec",
+    "QSvgIconSourceBase",
+    "QtApplicationError",
+    "get_qapplication",
+]

@@ -5,13 +5,13 @@ Scene Viewer. It currently includes a utility to toggle the viewport
 background color scheme for quick visual switching.
 """
 
-import hou
+from hou_wrapper import hou
 from pixelpouch.libs.core.logging_factory import PixelPouchLoggerFactory
 
 logger = PixelPouchLoggerFactory.get_logger(__name__)
 
 
-def toggle_viewport_background():
+def toggle_viewport_background() -> None:
     """Cycles the Scene Viewer viewport background color scheme.
 
     This function attempts to find the Scene Viewer under the mouse cursor.
@@ -35,9 +35,7 @@ def toggle_viewport_background():
         raise hou.Error("No Scene Viewer found.")
 
     if used_fallback:
-        logger.debug(
-            "Scene Viewer not under cursor; using first available Scene Viewer."
-        )
+        logger.debug("Scene Viewer not under cursor; using first available Scene Viewer.")
 
     viewport: hou.SceneViewer = pane.curViewport()
     settings: hou.GeometryViewportSettings = viewport.settings()

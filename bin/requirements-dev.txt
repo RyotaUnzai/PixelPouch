@@ -10,3 +10,6 @@ types-psutil==7.2.1.20260116
 rez==3.3.0
 pydantic==2.12.5
 pytest==9.0.2
+cython==3.2.4                                                                                                                                                                                                          
+setuptools==82.0.1                                                                                                                                                                                                     
+wheel==0.47.0   

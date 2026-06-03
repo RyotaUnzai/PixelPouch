@@ -47,6 +47,16 @@ if "%HOUDINI_VERSION%"=="" (
 set HOUDINI_LOCATION=C:\Program Files\Side Effects Software\Houdini %HOUDINI_VERSION%
 
 
+:: Download resources
+echo [STEP] Downloading resources
+powershell -NoProfile -ExecutionPolicy Bypass -File "%BIN_DIR%setup_resources.ps1" -ProjectRoot "%PROJECT_ROOT%"
+IF ERRORLEVEL 1 (
+  echo [ERROR] Resources setup failed
+  goto :EOF
+)
+echo [DONE] Resources setup completed
+
+
 :: Download fonts
 echo [STEP] Downloading fonts
 cmd /c "%BIN_DIR%download_fonts.bat"

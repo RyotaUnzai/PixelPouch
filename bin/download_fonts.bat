@@ -33,13 +33,37 @@ if %ERRORLEVEL% equ 0 (
     echo [FAILED] NotoSansCJKjp-Regular.otf
 )
 
-REM Download JetBrainsMono-Regular
-echo Downloading: JetBrainsMono-Regular.ttf
-powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://github.com/JetBrains/JetBrainsMono/raw/master/fonts/ttf/JetBrainsMono-Regular.ttf', '!FONT_DIR!\JetBrainsMono-Regular.ttf')"
+@REM REM Download JetBrainsMono-Regular
+@REM echo Downloading: JetBrainsMono-Regular.ttf
+@REM powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://github.com/JetBrains/JetBrainsMono/raw/master/fonts/ttf/JetBrainsMono-Regular.ttf', '!FONT_DIR!\JetBrainsMono-Regular.ttf')"
+@REM if %ERRORLEVEL% equ 0 (
+@REM     echo [OK] JetBrainsMono-Regular.ttf
+@REM ) else (
+@REM     echo [FAILED] JetBrainsMono-Regular.ttf
+@REM )
+
+
+REM Download UDEV Gothic zip
+set "UDEVGothic=UDEVGothic_NF_v2.2.0"
+echo Downloading: !UDEVGothic!.zip
+
+powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://github.com/yuru7/udev-gothic/releases/download/v2.2.0/!UDEVGothic!.zip', '!FONT_DIR!\!UDEVGothic!.zip')"
+
 if %ERRORLEVEL% equ 0 (
-    echo [OK] JetBrainsMono-Regular.ttf
+    echo [OK] !UDEVGothic!.zip
+
+    REM Extract zip
+    powershell -Command "Expand-Archive -Path '!FONT_DIR!\!UDEVGothic!.zip' -DestinationPath '!FONT_DIR!\udevgothic_tmp' -Force"
+
+    copy /Y "!FONT_DIR!\udevgothic_tmp\!UDEVGothic!\UDEVGothicNF-Regular.ttf" "!FONT_DIR!\UDEVGothicNF-Regular.ttf"
+
+    if %ERRORLEVEL% equ 0 (
+        echo [OK] UDEVGothicNF-Regular.ttf
+    ) else (
+        echo [FAILED] Extract or rename
+    )
 ) else (
-    echo [FAILED] JetBrainsMono-Regular.ttf
+    echo [FAILED] !UDEVGothic!.zip
 )
 
 REM Download Noto Sans JP Bold from noto-cjk

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mainMenu>
+    <menuBar>
+        <subMenu id="PixelPouch">
+            <label>PixelPouch</label>
+            <titleItem>
+                <label>Environment Valiables</label>
+            </titleItem>
+            <scriptItem>
+                <label>PATH</label>
+                <scriptCode>
+                    <![CDATA[
+import os
+paths = os.getenv("PATH")
+if paths:
+    for path in paths.split(";"):
+        print(path)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+            <scriptItem>
+                <label>PYTHONPATH</label>
+                <scriptCode>
+                    <![CDATA[
+import os
+paths = os.getenv("PYTHONPATH")
+if paths:
+    for path in paths.split(";"):
+        print(path)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+            <scriptItem>
+                <label>HOUDINI_PACKAGE_DIR</label>
+                <scriptCode>
+                    <![CDATA[
+import os
+paths = os.getenv("HOUDINI_PACKAGE_DIR")
+if paths:
+    for path in paths.split(";"):
+        print(path)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+            <scriptItem>
+                <label>HOUDINI_TOOLBAR_PATH</label>
+                <scriptCode>
+                    <![CDATA[
+import os
+paths = os.getenv("HOUDINI_TOOLBAR_PATH")
+if paths:
+    for path in paths.split(";"):
+        print(path)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+            <scriptItem>
+                <label>HOUDINI_OTLSCAN_PATH</label>
+                <scriptCode>
+                    <![CDATA[
+import os
+paths = os.getenv("HOUDINI_OTLSCAN_PATH")
+if paths:
+    for path in paths.split(";"):
+        print(path)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+            <scriptItem>
+                <label>HOUDINI_PATH</label>
+                <scriptCode>
+                    <![CDATA[
+import os
+paths = os.getenv("HOUDINI_PATH")
+if paths:
+    for path in paths.split(";"):
+        print(path)
+                ]]>
+                </scriptCode>
+            </scriptItem>
+        </subMenu>
+    </menuBar>
+</mainMenu>
